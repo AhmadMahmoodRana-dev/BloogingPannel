@@ -14,7 +14,7 @@ const LatestNew = () => {
       {/* First */}
       <div
         style={{ borderColor: darkTheme.colors.border }}
-        className="border flex justify-center items-center"
+        className="border border-l-0 flex justify-center items-center"
       >
         <div className="xl:w-[70%] lg:w-[80%] md:w-[90%] w-[90%] py-8 md:py-0">
         <img src={latest1} />
@@ -48,7 +48,7 @@ const LatestNew = () => {
       {/* Third */}
       <div
         style={{ borderColor: darkTheme.colors.border }}
-        className="border flex justify-center items-center"
+        className="border border-r-0 flex justify-center items-center"
       >
         <div className="xl:w-[70%] lg:w-[80%] md:w-[90%] w-[90%] py-8 md:py-0">
         <img src={latest3} />

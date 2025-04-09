@@ -35,7 +35,7 @@ const Header = () => {
         <div className="main-bottom-container grid grid-cols-3">
           <div
             style={{ borderColor: darkTheme.colors.border }}
-            className="border md:h-[155px] h-[100px] flex flex-col justify-center items-center"
+            className="border border-l-0 md:h-[155px] h-[100px] flex flex-col justify-center items-center"
           >
             <h1 className="lg:text-3xl md:text-2xl font-semibold">
               300<span className="text-yellow-400">+</span>
@@ -63,7 +63,7 @@ const Header = () => {
           </div>
           <div
             style={{ borderColor: darkTheme.colors.border }}
-            className="border md:h-[155px] h-[100px] flex flex-col justify-center items-center"
+            className="border border-r-0 md:h-[155px] h-[100px] flex flex-col justify-center items-center"
           >
             <h1 className="lg:text-3xl md:text-2xl font-semibold">
               10k<span className="text-yellow-400">+</span>

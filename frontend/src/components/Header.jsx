@@ -1,5 +1,7 @@
 import React from "react";
 import darkTheme from "../colors/theme";
+import { MdArrowOutward } from "react-icons/md";
+
 const Header = () => {
   return (
     <div
@@ -31,17 +33,47 @@ const Header = () => {
         </div>
         {/* Bottom Card */}
         <div className="main-bottom-container grid grid-cols-3">
-          <div style={{ borderColor: darkTheme.colors.border }} className="border h-[150px] flex flex-col justify-center items-center">
-            <h1 className="lg:text-3xl md:text-2xl font-semibold">300<span className="text-yellow-400">+</span></h1>
-            <p style={{color:darkTheme.colors.textSecondary}} className="lg:text-lg">Resource Available</p>
+          <div
+            style={{ borderColor: darkTheme.colors.border }}
+            className="border md:h-[150px] h-[100px] flex flex-col justify-center items-center"
+          >
+            <h1 className="lg:text-3xl md:text-2xl font-semibold">
+              300<span className="text-yellow-400">+</span>
+            </h1>
+            <p
+              style={{ color: darkTheme.colors.textSecondary }}
+              className="lg:text-lg  text-center md:text-md text-xs"
+            >
+              Resource Available
+            </p>
           </div>
-          <div style={{ borderColor: darkTheme.colors.border }} className="border h-[150px] flex flex-col justify-center items-center">
-            <h1 className="lg:text-3xl md:text-2xl font-semibold">12k<span className="text-yellow-400">+</span></h1>
-            <p style={{color:darkTheme.colors.textSecondary}} className="lg:text-lg">Total Downloads</p>
+          <div
+            style={{ borderColor: darkTheme.colors.border }}
+            className="border md:h-[150px] h-[100px] flex flex-col justify-center items-center"
+          >
+            <h1 className="lg:text-3xl md:text-2xl font-semibold">
+              12k<span className="text-yellow-400">+</span>
+            </h1>
+            <p
+              style={{ color: darkTheme.colors.textSecondary }}
+              className="lg:text-lg text-center md:text-md text-xs"
+            >
+              Total Downloads
+            </p>
           </div>
-          <div style={{ borderColor: darkTheme.colors.border }} className="border h-[150px] flex flex-col justify-center items-center">
-            <h1 className="lg:text-3xl md:text-2xl font-semibold">10k<span className="text-yellow-400">+</span></h1>
-            <p style={{color:darkTheme.colors.textSecondary}} className="lg:text-lg">Active Users</p>
+          <div
+            style={{ borderColor: darkTheme.colors.border }}
+            className="border md:h-[150px] h-[100px] flex flex-col justify-center items-center"
+          >
+            <h1 className="lg:text-3xl md:text-2xl font-semibold">
+              10k<span className="text-yellow-400">+</span>
+            </h1>
+            <p
+              style={{ color: darkTheme.colors.textSecondary }}
+              className="lg:text-lg text-center md:text-md text-xs"
+            >
+              Active Users
+            </p>
           </div>
         </div>
       </div>
@@ -49,10 +81,13 @@ const Header = () => {
       {/* Right Section */}
       <div
         style={{ borderColor: darkTheme.colors.border }}
-        className="md:w-[30%] md:min-h-[73vh] flex flex-col border-l items-center justify-end relative"
+        className="md:w-[30%] md:min-h-[73vh] min-h-[50vh] flex flex-col border-l items-center justify-end relative"
       >
         <div className="relative p-6 rounded-lg shadow-xl">
-          <div style={{backgroundColor:darkTheme.colors.cardBackground}} className="flex -space-x-3 overflow-hidden items-center justify-center rounded-2xl py-1 xl:w-[30%] lg:w-[50%] md:w-[70%]">
+          <div
+            style={{ backgroundColor: darkTheme.colors.cardBackground }}
+            className="flex -space-x-3 overflow-hidden items-center justify-center rounded-2xl py-1 xl:w-[30%] lg:w-[50%] md:w-[70%] w-[40%]"
+          >
             {[1, 2, 3, 4].map((i) => (
               <img
                 key={i}
@@ -64,16 +99,26 @@ const Header = () => {
               />
             ))}
           </div>
-          <h3 className="text-lg md:text-xl font-semibold mt-4 md:mt-6">
+          <h3 className="text-2xl md:text-xl font-semibold mt-4 md:mt-6">
             Explore 1000+ resources
           </h3>
-          <p className="text-gray-400 text-sm md:text-base mt-2">
+          <p
+            style={{ color: darkTheme.colors.textSecondary }}
+            className="text-gray-400 text-sm md:text-base mt-2"
+          >
             Over 1,000 articles on emerging tech trends and breakthroughs.
           </p>
-          <button className="mt-4 md:mt-6 lg:px-6 py-3 md:px-2  bg-yellow-500 hover:bg-yellow-600 text-black rounded-lg font-semibold flex items-center transition-colors duration-300">
+          <button
+            style={{
+              backgroundColor: darkTheme.colors.cardBackground,
+              color: darkTheme.colors.textPrimary,
+              borderColor: darkTheme.colors.border,
+            }}
+            className="mt-4 md:mt-6 lg:px-6 py-3 md:px-2 px-2  border rounded-lg font-semibold flex items-center transition-colors duration-300"
+          >
             Explore Resources
-            <span className="ml-2 transform transition-transform duration-300 hover:translate-x-1">
-              →
+            <span className="ml-2 transform transition-transform duration-300 hover:translate-x-1 text-yellow-400 ">
+              <MdArrowOutward/> 
             </span>
           </button>
         </div>

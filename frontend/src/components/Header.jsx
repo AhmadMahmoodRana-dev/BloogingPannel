@@ -35,7 +35,7 @@ const Header = () => {
         <div className="main-bottom-container grid grid-cols-3">
           <div
             style={{ borderColor: darkTheme.colors.border }}
-            className="border md:h-[150px] h-[100px] flex flex-col justify-center items-center"
+            className="border md:h-[155px] h-[100px] flex flex-col justify-center items-center"
           >
             <h1 className="lg:text-3xl md:text-2xl font-semibold">
               300<span className="text-yellow-400">+</span>
@@ -49,7 +49,7 @@ const Header = () => {
           </div>
           <div
             style={{ borderColor: darkTheme.colors.border }}
-            className="border md:h-[150px] h-[100px] flex flex-col justify-center items-center"
+            className="border md:h-[155px] h-[100px] flex flex-col justify-center items-center"
           >
             <h1 className="lg:text-3xl md:text-2xl font-semibold">
               12k<span className="text-yellow-400">+</span>
@@ -63,7 +63,7 @@ const Header = () => {
           </div>
           <div
             style={{ borderColor: darkTheme.colors.border }}
-            className="border md:h-[150px] h-[100px] flex flex-col justify-center items-center"
+            className="border md:h-[155px] h-[100px] flex flex-col justify-center items-center"
           >
             <h1 className="lg:text-3xl md:text-2xl font-semibold">
               10k<span className="text-yellow-400">+</span>
@@ -81,7 +81,7 @@ const Header = () => {
       {/* Right Section */}
       <div
         style={{ borderColor: darkTheme.colors.border }}
-        className="md:w-[30%] md:min-h-[73vh] min-h-[50vh] flex flex-col border-l items-center justify-end relative"
+        className="md:w-[30%] md:min-h-[73vh] min-h-[50vh] flex flex-col border-l border-b items-center justify-end relative"
       >
         <div className="relative p-6 rounded-lg shadow-xl">
           <div

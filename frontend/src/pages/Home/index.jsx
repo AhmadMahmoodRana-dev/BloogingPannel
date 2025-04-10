@@ -36,8 +36,8 @@ const Home = () => {
       <FutureTechFeature />
       <TechBlogMain data={data} icon={icon} Heading={"Future Technology Blog"} Para={"Stay informed with our blog section dedicated to future technology."} />
       <TechBlogMain data={data} icon={icon1} Heading={"Research Insights Blogs"} Para={"Dive deep into future technology concepts with our research section."} />
-      {/* <BlogList /> */}
       <BlogListFeature/>
+      <BlogList />
     </div>
   );
 };

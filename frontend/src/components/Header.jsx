@@ -81,7 +81,7 @@ const Header = () => {
       {/* Right Section */}
       <div
         style={{ borderColor: darkTheme.colors.border }}
-        className="md:w-[30%] md:min-h-[73vh] min-h-[50vh] flex flex-col border-l border-b items-center justify-end relative"
+        className="md:w-[30%] md:min-h-[73vh] min-h-[50vh] flex flex-col md:border-l md:border-b items-center justify-end relative"
       >
         <div className="relative p-6 rounded-lg shadow-xl">
           <div

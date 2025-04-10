@@ -68,7 +68,7 @@ const blogPosts = [
 ];
 const BlogList = () => {
   return (
-    <div style={{backgroundColor:darkTheme.colors.background}} className="min-h-screen p-8 space-y-8">
+    <div style={{backgroundColor:darkTheme.colors.background}} className="min-h-screen xl:px-16 xl:py-[5.7rem] lg:px-10 lg:py-[2.95rem] md:px-4 md:py-[1.82rem] p-4 space-y-8">
       {/* Tabs */}
       <div className="grid lg:grid-cols-6 md:grid-cols-3 grid-cols-2 gap-2 md:gap-5 xl:gap-10 lg:gap-8 2xl:mx-20 justify-center">
         {categories.map((cat) => (
@@ -126,7 +126,7 @@ const BlogList = () => {
               </div>
 
               {/* Actions */}
-              <div className="flex items-center justify-between mt-4">
+              <div className="flex flex-wrap  items-center justify-between mt-4">
                 <div style={{color:darkTheme.colors.textSecondary}} className="flex gap-6">
                   <div className="flex items-center gap-1.5">
                     <Heart className="w-4 h-4" />
@@ -141,7 +141,7 @@ const BlogList = () => {
                     <span className="text-xs font-medium">{post.shares}</span>
                   </div>
                 </div>
-                <button style={{backgroundColor:darkTheme.colors.cardBackground,borderColor:darkTheme.colors.border}} className="flex items-center gap-2 px-4 py-3  rounded-lg border">
+                <button style={{backgroundColor:darkTheme.colors.cardBackground,borderColor:darkTheme.colors.border}} className="flex items-center gap-2 px-4 py-3  rounded-lg border md:mt-0 mt-4">
                   <span style={{color:darkTheme.colors.textPrimary}} className="text-sm font-semibold">
                     Read Article
                   </span>

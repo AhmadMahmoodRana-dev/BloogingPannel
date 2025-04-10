@@ -20,7 +20,7 @@ const blogPosts = [
     date: "October 15, 2023",
     title: "The Quantum Leap in Computing",
     description:
-      "Explore the revolution in quantum computing, its applications, and its potential impact on various industries.",
+      "A deep dive into ethical challenges posed by AI, including bias, privacy, and transparency.",
     likes: "24.5k",
     comments: 50,
     shares: 20,
@@ -46,7 +46,7 @@ const blogPosts = [
     date: "October 15, 2023",
     title: "The Quantum Leap in Computing",
     description:
-      "Explore the revolution in quantum computing, its applications, and its potential impact on various industries.",
+      "A deep dive into ethical challenges posed by AI, including bias, privacy, and transparency.",
     likes: "24.5k",
     comments: 50,
     shares: 20,
@@ -70,7 +70,7 @@ const BlogList = () => {
   return (
     <div style={{backgroundColor:darkTheme.colors.background}} className="min-h-screen xl:px-16 xl:py-[5.7rem] lg:px-10 lg:py-[2.95rem] md:px-4 md:py-[1.82rem] p-4 space-y-8">
       {/* Tabs */}
-      <div className="grid lg:grid-cols-6 md:grid-cols-3 grid-cols-2 gap-2 md:gap-5 xl:gap-10 lg:gap-8 2xl:mx-20 justify-center">
+      <div className="grid lg:grid-cols-6 md:grid-cols-3 grid-cols-2 gap-2 md:gap-5 xl:gap-10 lg:gap-8 2xl:mx-16 justify-center">
         {categories.map((cat) => (
           <button
           style={{borderColor: darkTheme.colors.border}}

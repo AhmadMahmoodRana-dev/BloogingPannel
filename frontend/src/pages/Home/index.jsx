@@ -6,6 +6,8 @@ import FutureTechFeature from "../../components/FutureTechFeature";
 import TechBlogMain from "../../components/TechBlogMain";
 import icon from "../../assets/Icon.png";
 import icon1 from "../../assets/Icon1.png";
+import BlogList from "../../components/BLogList";
+import BlogListFeature from "../../components/BlogListFeature";
 
 const Home = () => {
   const data = [
@@ -34,6 +36,8 @@ const Home = () => {
       <FutureTechFeature />
       <TechBlogMain data={data} icon={icon} Heading={"Future Technology Blog"} Para={"Stay informed with our blog section dedicated to future technology."} />
       <TechBlogMain data={data} icon={icon1} Heading={"Research Insights Blogs"} Para={"Dive deep into future technology concepts with our research section."} />
+      {/* <BlogList /> */}
+      <BlogListFeature/>
     </div>
   );
 };

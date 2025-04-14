@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ArrowUpRight, Heart, MessageCircle, Share } from "lucide-react";
 import darkTheme from "../../colors/theme";
+import BlogCard from "../Blog/BlogCard";
 
 const categories = [
   "All",
@@ -103,89 +104,17 @@ const BlogList = () => {
       {/* Blog Cards */}
       <div className="grid gap-8 md:grid-cols-2">
         {filteredPosts.map((post) => (
-          <div
-            key={post.id}
-            className="group bg-[#141414] p-6 rounded-xl border border-[#2a2a2a] hover:border-[#3a3a3a] transition-all hover:-translate-y-1.5 cursor-pointer"
-          >
-            <div className="flex flex-col gap-6">
-              {/* Author Info */}
-              <div className="flex items-center gap-4">
-                <div className="relative">
-                  <img
-                    src={post.avatar}
-                    alt={post.author}
-                    style={{ borderColor: darkTheme.colors.border }}
-                    className="w-12 h-12 rounded-full object-cover border-2"
-                  />
-                  <div className="absolute inset-0 rounded-full border-2 border-transparent" />
-                </div>
-                <div>
-                  <p className="font-semibold text-gray-100">{post.author}</p>
-                  <p
-                    style={{ color: darkTheme.colors.textSecondary }}
-                    className="text-sm text-transparent"
-                  >
-                    {post.category}
-                  </p>
-                </div>
-              </div>
-
-              {/* Blog Content */}
-              <div className="space-y-3">
-                <p
-                  style={{ color: darkTheme.colors.textSecondary }}
-                  className="text-xs font-mono"
-                >
-                  {post.date}
-                </p>
-                <h2 className="text-2xl font-bold bg-gradient-to-r from-gray-100 to-gray-300 bg-clip-text text-transparent">
-                  {post.title}
-                </h2>
-                <p
-                  style={{ color: darkTheme.colors.textSecondary }}
-                  className="leading-relaxed"
-                >
-                  {post.description}
-                </p>
-              </div>
-
-              {/* Actions */}
-              <div className="flex flex-wrap  items-center justify-between mt-4">
-                <div
-                  style={{ color: darkTheme.colors.textSecondary }}
-                  className="flex gap-6"
-                >
-                  <div className="flex items-center gap-1.5">
-                    <Heart className="w-4 h-4" />
-                    <span className="text-xs font-medium">{post.likes}</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <MessageCircle className="w-4 h-4" />
-                    <span className="text-xs font-medium">{post.comments}</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <Share className="w-4 h-4" />
-                    <span className="text-xs font-medium">{post.shares}</span>
-                  </div>
-                </div>
-                <button
-                  style={{
-                    backgroundColor: darkTheme.colors.cardBackground,
-                    borderColor: darkTheme.colors.border,
-                  }}
-                  className="flex items-center gap-2 px-4 py-3  rounded-lg border md:mt-0 mt-4"
-                >
-                  <span
-                    style={{ color: darkTheme.colors.textPrimary }}
-                    className="text-sm font-semibold"
-                  >
-                    Read Article
-                  </span>
-                  <ArrowUpRight color="#f0b100" className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-          </div>
+          <BlogCard
+            author={post.author}
+            category={post.category}
+            comments={post.comments}
+            date={post.date}
+            description={post.description}
+            image={post.avatar}
+            likes={post.likes}
+            shares={post.shares}
+            title={post.title}
+          />
         ))}
       </div>
     </div>

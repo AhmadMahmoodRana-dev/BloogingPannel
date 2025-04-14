@@ -4,6 +4,7 @@ import PublicRoutes from "./routes/PublicRoutes";
 import PrivateRoutes from "./routes/PrivateRoutes";
 import Home from "./pages/Home/index";
 import Navbar from "./components/Navbar";
+import BlogPage from "./pages/BlogPage/BlogPage";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         {/* Private Routes */}
         <Route element={<PrivateRoutes />}>
           <Route path="/" element={<Home/>} />
+          <Route path="/blog" element={<BlogPage/>} />
         </Route>
       </Routes>
     </div>

@@ -8,6 +8,7 @@ import Navbar from "../../components/Navbar"
 import LatestNews from "../../components/Home/LatestNew"
 import HomePageUseableContainer from "../../components/Home/HomePageUseableContainer"
 import TestimonialSection from "../../components/Home/TestimonialSection"
+import Landing from "../../components/Landing";
 
 const Home = () => {
   const data = [
@@ -68,6 +69,7 @@ const Home = () => {
         ButtonText={"View All Testimonials"}
       />
       <TestimonialSection />
+      <Landing/>
     </div>
   );
 };

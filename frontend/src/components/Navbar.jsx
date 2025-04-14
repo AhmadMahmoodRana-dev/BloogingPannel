@@ -11,7 +11,7 @@ const Navbar = () => {
         backgroundColor: darkTheme.colors.NavbarBackground,
         borderColor: darkTheme.colors.border,
       }}
-      className="py-4 px-16 shadow-md border-b"
+      className="py-4 lg:px-16  px-5 md:px-8 shadow-md border-b"
     >
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}

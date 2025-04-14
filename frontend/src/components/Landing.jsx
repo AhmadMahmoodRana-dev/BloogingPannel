@@ -17,7 +17,7 @@ export default function Landing() {
       </header>
 
       {/* Enhanced Cards Section */}
-      <section className="px-4 mb-24 max-w-7xl mx-auto">
+      <section className="px-4 my-24 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {[
             {

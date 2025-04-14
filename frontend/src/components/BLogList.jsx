@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { ArrowUpRight, Heart, MessageCircle, Share } from "lucide-react";
 import darkTheme from "../colors/theme";
 
-// ... (keep categories and blogPosts arrays the same)
 const categories = [
   "All",
   "Quantum Computing",
@@ -67,15 +66,19 @@ const blogPosts = [
   },
 ];
 const BlogList = () => {
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const filteredPosts = selectedCategory === "All"? blogPosts: blogPosts.filter((post) => post.category === selectedCategory);
+ 
   return (
     <div style={{backgroundColor:darkTheme.colors.background}} className="min-h-screen xl:px-16 xl:py-[5.7rem] lg:px-10 lg:py-[2.95rem] md:px-4 md:py-[1.82rem] p-4 space-y-8">
       {/* Tabs */}
       <div className="grid lg:grid-cols-6 md:grid-cols-3 grid-cols-2 gap-2 md:gap-5 xl:gap-10 lg:gap-8 2xl:mx-16 justify-center">
         {categories.map((cat) => (
           <button
+          onClick={() => setSelectedCategory(cat)}
           style={{borderColor: darkTheme.colors.border}}
             key={cat}
-            className={`px-5 py-2.5 rounded-sm  text-sm font-medium transition-all border
+            className={`px-5 py-2.5 rounded-sm  md:text-sm text-xs font-medium transition-all border
               ${
                 cat === "All"
                   ? "bg-[#1a1a1a] text-gray-300 hover:bg-[#252525]"
@@ -89,7 +92,7 @@ const BlogList = () => {
 
       {/* Blog Cards */}
       <div className="grid gap-8 md:grid-cols-2">
-        {blogPosts.map((post) => (
+        {filteredPosts.map((post) => (
           <div
             key={post.id}
             className="group bg-[#141414] p-6 rounded-xl border border-[#2a2a2a] hover:border-[#3a3a3a] transition-all hover:-translate-y-1.5 cursor-pointer"

@@ -4,18 +4,24 @@ import BlacklistedToken from "../models/BlacklistedToken.schema.js";
 import User from "../models/User.schema.js";
 
 // Register
-export const  register = async (req, res) => {
-  const { name, email, password, phone } = req.body;
+export const register = async (req, res) => {
+  try {
+    const { name, email, password, phone } = req.body;
 
-  const existing = await User.findOne({ email });
-  if (existing) return res.status(400).send("Email already exists");
+    const existing = await User.findOne({ email });
+    if (existing) return res.status(400).send("Email already exists");
 
-  const hashed = await bcrypt.hash(password, 10);
+    const hashed = await bcrypt.hash(password, 10);
 
-  const tech = new User({ name, email, password: hashed, phone });
-  await tech.save();
-  res.send("User registered");
+    const user = new User({ name, email, password: hashed, phone });
+    await user.save();
+    res.send("User registered");
+  } catch (err) {
+    console.error("Register error:", err);
+    res.status(500).send("Server error");
+  }
 };
+
 
 // Login
 export const login = async (req, res) => {
@@ -23,18 +29,18 @@ export const login = async (req, res) => {
     const { email, password } = req.body;
 
     // 1. Find User
-    const tech = await User.findOne({ email });
-    if (!tech) {
+    const user = await User.findOne({ email });
+    if (!user) {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
     // 2. Check password
-    const valid = await bcrypt.compare(password, tech.password);
+    const valid = await bcrypt.compare(password, user.password);
     if (!valid) {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
     // 3. Sign token with 7d expiry
     const token = jwt.sign(
-      { _id: tech._id },
+      { _id: user._id },
       process.env.JWT_SECRET,
       { expiresIn: '7d' }
     );
@@ -51,20 +57,20 @@ export const login = async (req, res) => {
 // Profile
 export const profile = async (req, res) => {
   console.log(req,"request")
-  const tech = await User.findById(req.User._id).select(
+  const user = await User.findById(req.User._id).select(
     "-password"
   );
-  res.send(tech);
+  res.send(user);
 };
 
 // Update Profile
 export const updateProfile = async (req, res) => {
-  const tech = await User.findByIdAndUpdate(
+  const user = await User.findByIdAndUpdate(
     req.User._id,
     req.body,
     { new: true }
   );
-  res.send(tech);
+  res.send(user);
 };
 
 

@@ -1,5 +1,5 @@
 import React from "react";
-import darkTheme from "../colors/theme";
+import darkTheme from "../../colors/theme";
 import { MdArrowOutward } from "react-icons/md";
 
 const HomePageUseableContainer = ({

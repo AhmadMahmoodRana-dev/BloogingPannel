@@ -1,5 +1,5 @@
 import React from "react";
-import darkTheme from "../colors/theme";
+import darkTheme from "../../colors/theme";
 import { MdArrowOutward } from "react-icons/md";
 
 const Header = () => {
@@ -118,7 +118,7 @@ const Header = () => {
           >
             Explore Resources
             <span className="ml-2 transform transition-transform duration-300 hover:translate-x-1 text-yellow-400 ">
-              <MdArrowOutward/> 
+              <MdArrowOutward />
             </span>
           </button>
         </div>

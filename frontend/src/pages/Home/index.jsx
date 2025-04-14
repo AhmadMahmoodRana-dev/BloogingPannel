@@ -1,13 +1,13 @@
 import React from "react";
-import Navbar from "../../components/Navbar";
-import Header from "../../components/Header";
-import LatestNews from "../../components/LatestNew";
-import TechBlogMain from "../../components/TechBlogMain";
 import icon from "../../assets/Icon.png";
 import icon1 from "../../assets/Icon1.png";
-import BlogList from "../../components/BLogList";
-import HomePageUseableContainer from "../../components/HomePageUseableContainer";
-import TestimonialSection from "../../components/TestimonialSection";
+import BlogList from "../../components/Home/BLogList";
+import TechBlogMain from "../../components/Home/TechBlogMain";
+import Header from "../../components/Home/Header";
+import Navbar from "../../components/Navbar"
+import LatestNews from "../../components/Home/LatestNew"
+import HomePageUseableContainer from "../../components/Home/HomePageUseableContainer"
+import TestimonialSection from "../../components/Home/TestimonialSection"
 
 const Home = () => {
   const data = [

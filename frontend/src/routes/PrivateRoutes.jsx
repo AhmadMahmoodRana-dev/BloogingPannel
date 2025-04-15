@@ -2,7 +2,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import Layout from "../layout/Layout";
 
 const PrivateRoutes = () => {
-  const token = true; // replace with real auth logic
+  const token = false;
   return token ? (
     <Layout>
       <Outlet />

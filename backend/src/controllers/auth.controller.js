@@ -6,14 +6,14 @@ import User from "../models/User.schema.js";
 // Register
 export const register = async (req, res) => {
   try {
-    const { name, email, password, phone } = req.body;
+    const { name, email, password, phone,role } = req.body;
 
     const existing = await User.findOne({ email });
     if (existing) return res.status(400).send("Email already exists");
 
     const hashed = await bcrypt.hash(password, 10);
 
-    const user = new User({ name, email, password: hashed, phone });
+    const user = new User({ name, email, password: hashed, phone,role });
     await user.save();
     res.send("User registered");
   } catch (err) {

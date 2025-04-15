@@ -1,13 +1,13 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import darkTheme from "../../colors/theme";
-import RegisterSchema from "../../schema/RegisterSchema";
 import useAuthStore from "../../store/useAuthStore";
-import { ToastContainer, toast } from "react-toastify"; // Import Toastify
-import "react-toastify/dist/ReactToastify.css"; // Import CSS for Toastify
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import LoginSchema from "../../schema/LoginSchema";
 
-const Register = () => {
-  const { register } = useAuthStore();
+const Login = () => {
+  const { login } = useAuthStore();
 
   const inputStyle = {
     backgroundColor: darkTheme.colors.cardBackground,
@@ -28,11 +28,8 @@ const Register = () => {
   };
 
   const initialValues = {
-    name: "",
     email: "",
     password: "",
-    phone: "",
-    role: "admin",
   };
 
   return (
@@ -48,11 +45,12 @@ const Register = () => {
     >
       <Formik
         initialValues={initialValues}
-        validationSchema={RegisterSchema}
+        validationSchema={LoginSchema}
         onSubmit={(values, { resetForm }) => {
-          register(values);
+          console.log(values);
+          login(values)
           resetForm();
-          toast.success("Account created successfully!");
+          toast.success("Login Successfully!");
         }}
       >
         {() => (
@@ -73,18 +71,8 @@ const Register = () => {
                 textAlign: "center",
               }}
             >
-              Create Account
+              Login Account
             </h2>
-
-            <div style={{ marginBottom: "16px" }}>
-              <label style={labelStyle}>Full Name</label>
-              <Field name="name" type="text" style={inputStyle} />
-              <ErrorMessage
-                name="name"
-                component="div"
-                style={{ color: darkTheme.colors.error }}
-              />
-            </div>
 
             <div style={{ marginBottom: "16px" }}>
               <label style={labelStyle}>Email</label>
@@ -95,7 +83,6 @@ const Register = () => {
                 style={{ color: darkTheme.colors.error }}
               />
             </div>
-
             <div style={{ marginBottom: "16px" }}>
               <label style={labelStyle}>Password</label>
               <Field name="password" type="password" style={inputStyle} />
@@ -105,17 +92,6 @@ const Register = () => {
                 style={{ color: darkTheme.colors.error }}
               />
             </div>
-
-            <div style={{ marginBottom: "16px" }}>
-              <label style={labelStyle}>Phone Number</label>
-              <Field name="phone" type="tel" style={inputStyle} />
-              <ErrorMessage
-                name="phone"
-                component="div"
-                style={{ color: darkTheme.colors.error }}
-              />
-            </div>
-            <Field name="role" type="hidden" />
 
             <button
               type="submit"
@@ -130,7 +106,7 @@ const Register = () => {
                 cursor: "pointer",
               }}
             >
-              Register
+              Login
             </button>
 
             <p
@@ -140,9 +116,12 @@ const Register = () => {
                 marginTop: "16px",
               }}
             >
-              Already have an account?{" "}
-              <a href="/login" style={{ color: darkTheme.colors.textPrimary }}>
-                Login
+              Donot have an account?{" "}
+              <a
+                href="/register"
+                style={{ color: darkTheme.colors.textPrimary }}
+              >
+                Register
               </a>
             </p>
           </Form>
@@ -150,18 +129,18 @@ const Register = () => {
       </Formik>
 
       {/* Toast container to display the toast messages */}
-      <ToastContainer 
-        position="top-right" 
+      <ToastContainer
+        position="top-right"
         autoClose={5000}
-        hideProgressBar 
-        closeOnClick 
-        rtl={false} 
-        pauseOnFocusLoss 
-        draggable 
-        pauseOnHover 
+        hideProgressBar
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
       />
     </div>
   );
 };
 
-export default Register;
+export default Login;

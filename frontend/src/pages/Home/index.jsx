@@ -4,10 +4,10 @@ import icon1 from "../../assets/Icon1.png";
 import BlogList from "../../components/Home/BLogList";
 import TechBlogMain from "../../components/Home/TechBlogMain";
 import Header from "../../components/Home/Header";
-import Navbar from "../../components/Navbar"
-import LatestNews from "../../components/Home/LatestNew"
-import HomePageUseableContainer from "../../components/Home/HomePageUseableContainer"
-import TestimonialSection from "../../components/Home/TestimonialSection"
+import Navbar from "../../components/Navbar";
+import LatestNews from "../../components/Home/LatestNew";
+import HomePageUseableContainer from "../../components/Home/HomePageUseableContainer";
+import TestimonialSection from "../../components/Home/TestimonialSection";
 import Landing from "../../components/Landing";
 
 const Home = () => {
@@ -33,7 +33,9 @@ const Home = () => {
     },
   ];
   return (
-    <div className="w-full h-screen">
+    <div className="w-full miin-h-screen h-auto">
+      <Navbar />
+
       <Header />
       <LatestNews />
       <HomePageUseableContainer
@@ -68,7 +70,7 @@ const Home = () => {
         ButtonText={"View All Testimonials"}
       />
       <TestimonialSection />
-      <Landing/>
+      <Landing />
     </div>
   );
 };

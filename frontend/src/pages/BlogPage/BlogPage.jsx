@@ -4,7 +4,7 @@ import darkTheme from "../../colors/theme";
 import { FaRegEye, FaHeart, FaLocationArrow } from "react-icons/fa";
 import ReadMore from "../../components/Blog/ReadMore";
 import BlogCard from "../../components/Blog/BlogCard";
-
+import Navbar from "../../components/Navbar";
 
 const blogPosts = [
   {
@@ -48,7 +48,7 @@ const blogPosts = [
     shares: 20,
     avatar:
       "https://img.freepik.com/premium-vector/cool-cartoon-boy-avatar_987671-675.jpg?ga=GA1.1.1076821047.1737958060&semt=ais_hybrid&w=740", // Replace with your own image path
-  }
+  },
 ];
 
 const BlogPage = () => {
@@ -60,165 +60,178 @@ const BlogPage = () => {
     "One of the most prominent applications of AI in healthcare is in diagnostic imaging. AI algorithms have demonstrated remarkable proficiency in interpreting medical images such as X-rays, MRIs, and CT scans. They can identify anomalies and deviations that might be overlooked by the human eye. This is particularly valuable in early disease detection. For instance, AI can aid radiologists in detecting minute irregularities in mammograms or identifying critical findings in chest X-rays, potentially indicative of life-threatening conditions.";
 
   return (
-    <div
-      style={{ backgroundColor: darkTheme.colors.background }}
-      className="text-white font-sans"
-    >
-      {/* Header Section */}
+    <>
+      <Navbar />
       <div
-        className="relative h-[500px] w-full bg-cover bg-center"
-        style={{ backgroundImage: `url(${Blog})` }}
+        style={{ backgroundColor: darkTheme.colors.background }}
+        className="text-white font-sans"
       >
-        <div className="absolute inset-0 flex items-center justify-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-center">
-            The Rise of Artificial Intelligence in Healthcare
-          </h1>
-        </div>
-      </div>
-      {/* Modified Blog Info Section */}
-      <div className="max-w-7xl mx-auto px-4 py-12 grid md:grid-cols-3 gap-8">
-        <div className="md:col-span-2 space-y-6">
-          <div>
-            <h2 className="text-2xl font-semibold">Introduction</h2>
-            <ReadMore
-              text={introText}
-              maxLength={300}
-              className="mt-2 text-gray-300"
-            />
-          </div>
-
-          <div>
-            <h2 className="text-2xl font-semibold">
-              Artificial Intelligence (AI)
-            </h2>
-            <ReadMore
-              text={aiText}
-              maxLength={800}
-              className="mt-2 text-gray-300"
-            />
-            <ReadMore
-              text={aiText}
-              maxLength={800}
-              className="mt-2 text-gray-300"
-            />
-          </div>
-
-          <div>
-            <h2 className="text-2xl font-semibold">
-              Predictive Analytics and Disease Prevention
-            </h2>
-            <ReadMore
-              text={predictiveText}
-              maxLength={200}
-              className="mt-2 text-gray-300"
-            />
+        {/* Header Section */}
+        <div
+          className="relative h-[500px] w-full bg-cover bg-center"
+          style={{ backgroundImage: `url(${Blog})` }}
+        >
+          <div className="absolute inset-0 flex items-center justify-center">
+            <h1 className="text-4xl md:text-5xl font-bold text-center">
+              The Rise of Artificial Intelligence in Healthcare
+            </h1>
           </div>
         </div>
-        {/* Sidebar Section */}
-        <div className="space-y-6">
-          <div
-            style={{ borderColor: darkTheme.colors.border }}
-            className="border p-4 rounded"
-          >
-            <div className="flex items-center justify-between text-sm text-gray-400">
-              <span className="flex justify-center items-center gap-2">
-                <FaHeart size={20} color="#FF5500" />
-                50k
-              </span>
-              <span className="flex justify-center items-center gap-2">
-                <FaRegEye size={20} />
-                50k
-              </span>
-              <span className="flex justify-center items-center gap-2">
-                <FaLocationArrow size={20} />
-                50k
-              </span>
+        {/* Modified Blog Info Section */}
+        <div className="max-w-7xl mx-auto px-4 py-12 grid md:grid-cols-3 gap-8">
+          <div className="md:col-span-2 space-y-6">
+            <div>
+              <h2 className="text-2xl font-semibold">Introduction</h2>
+              <ReadMore
+                text={introText}
+                maxLength={300}
+                className="mt-2 text-gray-300"
+              />
+            </div>
+
+            <div>
+              <h2 className="text-2xl font-semibold">
+                Artificial Intelligence (AI)
+              </h2>
+              <ReadMore
+                text={aiText}
+                maxLength={800}
+                className="mt-2 text-gray-300"
+              />
+              <ReadMore
+                text={aiText}
+                maxLength={800}
+                className="mt-2 text-gray-300"
+              />
+            </div>
+
+            <div>
+              <h2 className="text-2xl font-semibold">
+                Predictive Analytics and Disease Prevention
+              </h2>
+              <ReadMore
+                text={predictiveText}
+                maxLength={200}
+                className="mt-2 text-gray-300"
+              />
             </div>
           </div>
-          <div
-            style={{ borderColor: darkTheme.colors.border }}
-            className="border p-4 rounded"
-          >
-            <p className="text-md">
-              <span
-                className="text-lg"
-                style={{ color: darkTheme.colors.textSecondary }}
-              >
-                Publication Date :
-              </span>{" "}
-              October 15, 2023
-            </p>
-            <p className="text-md">
-              <span
-                className="text-lg"
-                style={{ color: darkTheme.colors.textSecondary }}
-              >
-                Category :
-              </span>{" "}
-              Healthcare
-            </p>
-            <p className="text-md">
-              <span
-                className="text-lg"
-                style={{ color: darkTheme.colors.textSecondary }}
-              >
-                Reading Time :
-              </span>{" "}
-              10 Min
-            </p>
-            <p className="text-md">
-              <span
-                className="text-lg"
-                style={{ color: darkTheme.colors.textSecondary }}
-              >
-                Author :
-              </span>{" "}
-              Dr. Emily Walker
-            </p>
-          </div>
-          <div
-            style={{ borderColor: darkTheme.colors.border }}
-            className="border p-4 rounded"
-          >
-            <h3 className="font-semibold mb-2">Table of Contents</h3>
-            <ul className="space-y-1 list-disc list-inside text-gray-300">
-              <li>Introduction</li>
-              <li>AI in Diagnostic Imaging</li>
-              <li>Predictive Analytics and Disease Prevention</li>
-              <li>Personalized Treatment Plans</li>
-              <li>Drug Discovery and Research</li>
-              <li>AI in Telemedicine</li>
-              <li>Ethical Considerations</li>
-              <li>The Future of AI in Healthcare</li>
-              <li>Conclusion</li>
-            </ul>
+          {/* Sidebar Section */}
+          <div className="space-y-6">
+            <div
+              style={{ borderColor: darkTheme.colors.border }}
+              className="border p-4 rounded"
+            >
+              <div className="flex items-center justify-between text-sm text-gray-400">
+                <span className="flex justify-center items-center gap-2">
+                  <FaHeart size={20} color="#FF5500" />
+                  50k
+                </span>
+                <span className="flex justify-center items-center gap-2">
+                  <FaRegEye size={20} />
+                  50k
+                </span>
+                <span className="flex justify-center items-center gap-2">
+                  <FaLocationArrow size={20} />
+                  50k
+                </span>
+              </div>
+            </div>
+            <div
+              style={{ borderColor: darkTheme.colors.border }}
+              className="border p-4 rounded"
+            >
+              <p className="text-md">
+                <span
+                  className="text-lg"
+                  style={{ color: darkTheme.colors.textSecondary }}
+                >
+                  Publication Date :
+                </span>{" "}
+                October 15, 2023
+              </p>
+              <p className="text-md">
+                <span
+                  className="text-lg"
+                  style={{ color: darkTheme.colors.textSecondary }}
+                >
+                  Category :
+                </span>{" "}
+                Healthcare
+              </p>
+              <p className="text-md">
+                <span
+                  className="text-lg"
+                  style={{ color: darkTheme.colors.textSecondary }}
+                >
+                  Reading Time :
+                </span>{" "}
+                10 Min
+              </p>
+              <p className="text-md">
+                <span
+                  className="text-lg"
+                  style={{ color: darkTheme.colors.textSecondary }}
+                >
+                  Author :
+                </span>{" "}
+                Dr. Emily Walker
+              </p>
+            </div>
+            <div
+              style={{ borderColor: darkTheme.colors.border }}
+              className="border p-4 rounded"
+            >
+              <h3 className="font-semibold mb-2">Table of Contents</h3>
+              <ul className="space-y-1 list-disc list-inside text-gray-300">
+                <li>Introduction</li>
+                <li>AI in Diagnostic Imaging</li>
+                <li>Predictive Analytics and Disease Prevention</li>
+                <li>Personalized Treatment Plans</li>
+                <li>Drug Discovery and Research</li>
+                <li>AI in Telemedicine</li>
+                <li>Ethical Considerations</li>
+                <li>The Future of AI in Healthcare</li>
+                <li>Conclusion</li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
-      {/* Similar News Section */}
-      <div
-        style={{
-          backgroundColor: darkTheme.colors.background,
-          borderColor: darkTheme.colors.border,
-        }}
-        className="py-12 border-t"
-      >
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-semibold">Similar News</h2>
-            <button className="text-[#ff5500] hover:underline">
-              View All News ↗
-            </button>
-          </div>
+        {/* Similar News Section */}
+        <div
+          style={{
+            backgroundColor: darkTheme.colors.background,
+            borderColor: darkTheme.colors.border,
+          }}
+          className="py-12 border-t"
+        >
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-semibold">Similar News</h2>
+              <button className="text-[#ff5500] hover:underline">
+                View All News ↗
+              </button>
+            </div>
 
-          <div className="grid gap-8 md:grid-cols-3">
-            {blogPosts.map((post) => (
-              <BlogCard author={post.author} category={post.category} comments={post.comments} date={post.date} description={post.description} image={post.avatar} likes={post.likes} shares={post.shares} title={post.title} />
-            ))}
+            <div className="grid gap-8 md:grid-cols-3">
+              {blogPosts.map((post) => (
+                <BlogCard
+                  author={post.author}
+                  category={post.category}
+                  comments={post.comments}
+                  date={post.date}
+                  description={post.description}
+                  image={post.avatar}
+                  likes={post.likes}
+                  shares={post.shares}
+                  title={post.title}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -56,9 +56,9 @@ const Navbar = () => {
         {/* Contact Button */}
         <Link
           to="/contact"
-          className="hidden md:block bg-yellow-500 text-black px-4 py-2 rounded-md font-semibold"
+          className="hidden md:block bg-yellow-500 text-black w-9 h-9 rounded-full font-semibold"
         >
-          Contact Us
+          <img className="w-full h-full rounded-full" src="https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?ga=GA1.1.1076821047.1737958060&semt=ais_hybrid&w=740" alt="" />
         </Link>
 
         {/* Mobile Menu Button */}

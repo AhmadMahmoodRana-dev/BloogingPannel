@@ -1,13 +1,14 @@
 import { Navigate, Outlet } from "react-router-dom";
-import Layout from "../layout/Layout";
+import DashboardLayout from "../layout/DashboardLayout";
 
 const PrivateRoutes = () => {
   const token = localStorage.getItem("token");
   console.log("Stored token:", token);
-    return token ? (
-    <Layout>
+
+  return token ? (
+    <DashboardLayout>
       <Outlet />
-    </Layout>
+    </DashboardLayout>
   ) : (
     <Navigate to="/login" />
   );

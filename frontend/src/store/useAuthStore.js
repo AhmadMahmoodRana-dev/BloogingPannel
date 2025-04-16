@@ -2,7 +2,8 @@ import { create } from "zustand";
 import axios from "axios";
 
 const useAuthStore = create((set) => {
-  const storedToken = typeof window !== "undefined" ? localStorage.getItem("token") : null;
+  const storedToken =
+    typeof window !== "undefined" ? localStorage.getItem("token") : null;
 
   return {
     user: null,
@@ -14,12 +15,11 @@ const useAuthStore = create((set) => {
       set({ loading: true, error: null });
       try {
         const response = await axios.post(
-          "http://localhost:4000/api/auth/login",
+          `${import.meta.env.VITE_API_BASE_URL}auth/login`,
           credentials
         );
         console.log(response, "Login Response");
         const { token } = response.data;
-
         // Save token to localStorage
         localStorage.setItem("token", token);
 
@@ -36,7 +36,7 @@ const useAuthStore = create((set) => {
       set({ loading: true, error: null });
       try {
         const { data } = await axios.post(
-          "http://localhost:4000/api/auth/register",
+          `${import.meta.env.VITE_API_BASE_URL}auth/register`,
           userData
         );
         set({ user: data, loading: false });

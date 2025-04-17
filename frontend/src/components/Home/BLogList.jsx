@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-import { ArrowUpRight, Heart, MessageCircle, Share } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import darkTheme from "../../colors/theme";
 import BlogCard from "../Blog/BlogCard";
+import useBlogStore from "../../store/useBlogStore";
 
 const categories = [
   "All",
@@ -12,70 +13,38 @@ const categories = [
   "Renewable Energy",
 ];
 
-const blogPosts = [
-  {
-    id: 1,
-    author: "John Techson",
-    category: "Quantum Computing",
-    date: "October 15, 2023",
-    title: "The Quantum Leap in Computing",
-    description:
-      "A deep dive into ethical challenges posed by AI, including bias, privacy, and transparency.",
-    likes: "24.5k",
-    comments: 50,
-    shares: 20,
-    avatar:
-      "https://img.freepik.com/premium-vector/cool-cartoon-boy-avatar_987671-675.jpg?ga=GA1.1.1076821047.1737958060&semt=ais_hybrid&w=740", // Replace with your own image path
+// Animation variants
+const containerVariants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.1,
+    },
   },
-  {
-    id: 2,
-    author: "Sarah Ethicist",
-    category: "AI Ethics",
-    date: "November 5, 2023",
-    title: "The Ethical Dilemmas of AI",
-    description:
-      "A deep dive into ethical challenges posed by AI, including bias, privacy, and transparency.",
-    likes: "32k",
-    comments: 72,
-    shares: 18,
-    avatar:
-      "https://img.freepik.com/free-psd/3d-rendering-hair-style-avatar-design_23-2151869153.jpg?ga=GA1.1.1076821047.1737958060&semt=ais_hybrid&w=740", // Replace with your own image path
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, x: 200 }, // strong start offset
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.3,
+      ease: "easeInOut", // quick but sharp
+    },
   },
-  {
-    id: 3,
-    author: "John Techson",
-    category: "Quantum Computing",
-    date: "October 15, 2023",
-    title: "The Quantum Leap in Computing",
-    description:
-      "A deep dive into ethical challenges posed by AI, including bias, privacy, and transparency.",
-    likes: "24.5k",
-    comments: 50,
-    shares: 20,
-    avatar:
-      "https://img.freepik.com/premium-vector/cool-cartoon-boy-avatar_987671-675.jpg?ga=GA1.1.1076821047.1737958060&semt=ais_hybrid&w=740", // Replace with your own image path
-  },
-  {
-    id: 4,
-    author: "Sarah Ethicist",
-    category: "AI Ethics",
-    date: "November 5, 2023",
-    title: "The Ethical Dilemmas of AI",
-    description:
-      "A deep dive into ethical challenges posed by AI, including bias, privacy, and transparency.",
-    likes: "32k",
-    comments: 72,
-    shares: 18,
-    avatar:
-      "https://img.freepik.com/free-psd/3d-rendering-hair-style-avatar-design_23-2151869153.jpg?ga=GA1.1.1076821047.1737958060&semt=ais_hybrid&w=740", // Replace with your own image path
-  },
-];
+};
+
 const BlogList = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const filteredPosts =
-    selectedCategory === "All"
-      ? blogPosts
-      : blogPosts.filter((post) => post.category === selectedCategory);
+
+  const { getBlog, data } = useBlogStore();
+
+  useEffect(() => {
+    getBlog();
+  }, []);
+
+  
 
   return (
     <div
@@ -89,34 +58,37 @@ const BlogList = () => {
             onClick={() => setSelectedCategory(cat)}
             style={{ borderColor: darkTheme.colors.border }}
             key={cat}
-            className={`px-5 py-2.5 rounded-sm  md:text-sm text-xs font-medium transition-all border
-              ${
-                cat === "All"
-                  ? "bg-[#1a1a1a] text-gray-300 hover:bg-[#252525]"
-                  : "bg-[#1a1a1a] text-gray-300 hover:bg-[#252525]"
-              }`}
+            className="px-5 py-2.5 rounded-sm md:text-sm text-xs font-medium transition-all border bg-[#1a1a1a] text-gray-300 hover:bg-[#252525]"
           >
             {cat}
           </button>
         ))}
       </div>
 
-      {/* Blog Cards */}
-      <div className="grid gap-8 md:grid-cols-2">
-        {filteredPosts.map((post) => (
-          <BlogCard
-            author={post.author}
-            category={post.category}
-            comments={post.comments}
-            date={post.date}
-            description={post.description}
-            image={post.avatar}
-            likes={post.likes}
-            shares={post.shares}
-            title={post.title}
-          />
+      {/* Blog Cards with Strong Swipe Animation */}
+      <motion.div
+        className="grid gap-8 md:grid-cols-2"
+        variants={containerVariants}
+        initial="hidden"
+        animate="show"
+      >
+        {data.map((post, index) => (
+          <motion.div key={index} variants={cardVariants}>
+            <BlogCard
+              author={post.author}
+              category={post.category}
+              comments={post.comments}
+              date={post.createdAt}
+              description={post.excerpt}
+              image="https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?ga=GA1.1.1076821047.1737958060&semt=ais_hybrid&w=740"
+              likes={post.likes}
+              shares={post.shares}
+              title={post.title}
+              slug={post.slug}
+            />
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 };

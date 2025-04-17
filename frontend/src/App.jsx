@@ -13,7 +13,7 @@ const App = () => {
     <div className="w-full min-h-screen h-auto">
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/blog/:slug" element={<BlogPage />} />
 
         {/* Public Routes */}
         <Route element={<PublicRoutes />}>

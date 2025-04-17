@@ -41,6 +41,7 @@ const AddBlogPage = () => {
         featuredImage,
         isPublished,
       };
+      console.log(blogData)
       addBlog(blogData);
       toast.success("SuccessFully Upload Blog")
       // Reset all form fields

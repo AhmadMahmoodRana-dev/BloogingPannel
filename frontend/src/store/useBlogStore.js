@@ -7,6 +7,7 @@ const useBlogStore = create((set, get) => {
 
   return {
     data: [],
+    singleData:{},
     loading: false,
     error: null,
     token: storedToken,
@@ -14,7 +15,7 @@ const useBlogStore = create((set, get) => {
     addBlog: async (blogData) => {
       set({ loading: true, error: null });
       try {
-        const { token } = get();
+        const { token, getBlog } = get();
         const response = await axios.post(
           `${import.meta.env.VITE_API_BASE_URL}main/created`,
           blogData,
@@ -24,13 +25,42 @@ const useBlogStore = create((set, get) => {
             },
           }
         );
-        console.log(response, "SucessFully Add Blog");
+        console.log(response, "Successfully Added Blog");
+        // Instead of pushing data manually, just fetch all blogs again
+        await getBlog();
 
-        // Optionally update the blog list in state
-        set((state) => ({
-          data: [response.data.blog, ...state.data],
+        set({ loading: false });
+      } catch (error) {
+        set({
+          error: error.response?.data?.message || error.message,
           loading: false,
-        }));
+        });
+      }
+    },
+
+    getBlog: async () => {
+      set({ loading: true, error: null });
+      try {
+        const { data } = await axios.get(
+          `${import.meta.env.VITE_API_BASE_URL}main/`
+        );
+        console.log(data, "All Blog");
+        set({ data: data, loading: false });
+      } catch (error) {
+        set({
+          error: error.response?.data?.message || error.message,
+          loading: false,
+        });
+      }
+    },
+    getSingleSlugBlog: async (slug) => {
+      set({ loading: true, error: null });
+      try {
+        const { data } = await axios.get(
+          `${import.meta.env.VITE_API_BASE_URL}main/${slug}`
+        );
+        console.log(data, "Single Slug Blog");
+        set({ singleData: data, loading: false });
       } catch (error) {
         set({
           error: error.response?.data?.message || error.message,

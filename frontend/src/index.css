@@ -1,1 +1,27 @@
 @import "tailwindcss";
+
+
+.blog-content h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 1.5rem 0;
+  }
+  
+  .blog-content h2 {
+    font-size: 1.75rem;
+    font-weight: bold;
+    margin: 1.25rem 0;
+  }
+  
+  .blog-content h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 1rem 0;
+  }
+  
+  .blog-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0.75rem 0;
+    color: #d1d5db; /* matches text-gray-300 */
+  }

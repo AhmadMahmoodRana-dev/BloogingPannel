@@ -2,9 +2,10 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/Group.png";
 import darkTheme from "../colors/theme";
+import useAuthStore from "../store/useAuthStore";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const { logout } = useAuthStore();
   return (
     <nav
       style={{
@@ -55,10 +56,14 @@ const Navbar = () => {
 
         {/* Contact Button */}
         <Link
-          to="/contact"
+          onClick={() => logout()}
           className="hidden md:block bg-yellow-500 text-black w-9 h-9 rounded-full font-semibold"
         >
-          <img className="w-full h-full rounded-full" src="https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?ga=GA1.1.1076821047.1737958060&semt=ais_hybrid&w=740" alt="" />
+          <img
+            className="w-full h-full rounded-full"
+            src="https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?ga=GA1.1.1076821047.1737958060&semt=ais_hybrid&w=740"
+            alt=""
+          />
         </Link>
 
         {/* Mobile Menu Button */}

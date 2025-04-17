@@ -1,16 +1,17 @@
 import React from "react";
 import darkTheme from "../../colors/theme";
 import { ArrowUpRight, Heart, MessageCircle, Share } from "lucide-react";
+import { Link } from "react-router-dom";
 
-const BlogCard = ({image,author,category,date,title,description,likes,comments,shares}) => {
+const BlogCard = ({image,author,category,date,title,description,likes,comments,shares,slug}) => {
   return (
     <div
-      className="group bg-[#141414] p-6 rounded-xl border border-[#2a2a2a] hover:border-[#3a3a3a] transition-all hover:-translate-y-1.5 cursor-pointer"
+      className="group bg-[#141414] p-6 rounded-xl border border-[#2a2a2a] hover:border-[#3a3a3a] transition-all hover:-translate-y-1.5 cursor-pointer flex flex-col overflow-hidden"
     >
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-6 flex-1">
         {/* Author Info */}
-        <div className="flex items-center gap-4">
-          <div className="relative">
+        <div className="flex items-center gap-4 min-w-0">
+          <div className="relative flex-shrink-0">
             <img
               src={image}
               alt={image}
@@ -19,11 +20,11 @@ const BlogCard = ({image,author,category,date,title,description,likes,comments,s
             />
             <div className="absolute inset-0 rounded-full border-2 border-transparent" />
           </div>
-          <div>
-            <p className="font-semibold text-gray-100">{author}</p>
+          <div className="min-w-0">
+            <p className="font-semibold text-gray-100 truncate">{author}</p>
             <p
               style={{ color: darkTheme.colors.textSecondary }}
-              className="text-sm text-transparent"
+              className="text-sm truncate"
             >
               {category}
             </p>
@@ -31,29 +32,33 @@ const BlogCard = ({image,author,category,date,title,description,likes,comments,s
         </div>
 
         {/* Blog Content */}
-        <div className="space-y-3">
+        <div className="space-y-3 flex-1">
           <p
             style={{ color: darkTheme.colors.textSecondary }}
             className="text-xs font-mono"
           >
             {date}
           </p>
-          <h2 className="text-2xl font-bold bg-gradient-to-r from-gray-100 to-gray-300 bg-clip-text text-transparent">
+          <h2 className="text-2xl font-bold bg-gradient-to-r from-gray-100 to-gray-300 bg-clip-text text-transparent line-clamp-2">
             {title}
           </h2>
-          <p
-            style={{ color: darkTheme.colors.textSecondary }}
-            className="leading-relaxed"
-          >
-            {description}
-          </p>
+          <div className="relative">
+            <p
+              style={{ color: darkTheme.colors.textSecondary }}
+              className="leading-relaxed line-clamp-3"
+            >
+              {description}
+            </p>
+            {/* Fade-out effect for overflow text */}
+            <div className="absolute inset-x-0 bottom-0 h-6 bg-gradient-to-t from-[#141414] to-transparent" />
+          </div>
         </div>
 
         {/* Actions */}
-        <div className="flex flex-wrap  items-center justify-between mt-4">
+        <div className="flex flex-wrap items-center justify-between mt-4 gap-4">
           <div
             style={{ color: darkTheme.colors.textSecondary }}
-            className="flex gap-6"
+            className="flex gap-6 flex-wrap"
           >
             <div className="flex items-center gap-1.5">
               <Heart className="w-4 h-4" />
@@ -68,12 +73,12 @@ const BlogCard = ({image,author,category,date,title,description,likes,comments,s
               <span className="text-xs font-medium">{shares}</span>
             </div>
           </div>
-          <button
+          <Link to={`/blog/${slug}`}
             style={{
               backgroundColor: darkTheme.colors.cardBackground,
               borderColor: darkTheme.colors.border,
             }}
-            className="flex items-center gap-2 px-4 py-3  rounded-lg border md:mt-0 mt-4"
+            className="flex items-center gap-2 px-4 py-3 rounded-lg border flex-shrink-0"
           >
             <span
               style={{ color: darkTheme.colors.textPrimary }}
@@ -82,7 +87,7 @@ const BlogCard = ({image,author,category,date,title,description,likes,comments,s
               Read Article
             </span>
             <ArrowUpRight color="#f0b100" className="w-4 h-4" />
-          </button>
+          </Link>
         </div>
       </div>
     </div>

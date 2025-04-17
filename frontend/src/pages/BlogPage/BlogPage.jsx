@@ -1,10 +1,11 @@
-import React from "react";
-import Blog from "../../assets/blog.png";
+import React, { useEffect } from "react";
 import darkTheme from "../../colors/theme";
 import { FaRegEye, FaHeart, FaLocationArrow } from "react-icons/fa";
 import ReadMore from "../../components/Blog/ReadMore";
 import BlogCard from "../../components/Blog/BlogCard";
 import Navbar from "../../components/Navbar";
+import useBlogStore from "../../store/useBlogStore";
+import { useParams } from "react-router-dom";
 
 const blogPosts = [
   {
@@ -52,12 +53,11 @@ const blogPosts = [
 ];
 
 const BlogPage = () => {
-  // Define your content as variables for cleaner code
-  const introText =
-    "Artificial Intelligence (AI) has emerged as a transformative force in the healthcare industry, reshaping patient care, diagnostics, and research. In this blog post, we explore the profound impact of AI in healthcare, from revolutionizing diagnostic accuracy to enhancing patient outcomes.";
-  const aiText = `Artificial Intelligence (AI) has permeated virtually every aspect of our lives, and healthcare is no exception. The integration of AI in healthcare is ushering in a new era of medical practice, where machines complement the capabilities of healthcare professionals, ultimately improving patient outcomes and the efficiency of the healthcare system. In this blog post, we will delve into the diverse applications of AI in healthcare, from diagnostic imaging to personalized treatment plans, and address the ethical considerations surrounding this revolutionary technology.`;
-  const predictiveText =
-    "One of the most prominent applications of AI in healthcare is in diagnostic imaging. AI algorithms have demonstrated remarkable proficiency in interpreting medical images such as X-rays, MRIs, and CT scans. They can identify anomalies and deviations that might be overlooked by the human eye. This is particularly valuable in early disease detection. For instance, AI can aid radiologists in detecting minute irregularities in mammograms or identifying critical findings in chest X-rays, potentially indicative of life-threatening conditions.";
+  const { slug } = useParams();
+  const { getSingleSlugBlog, singleData } = useBlogStore();
+  useEffect(() => {
+    getSingleSlugBlog(slug);
+  }, []);
 
   return (
     <>
@@ -68,12 +68,14 @@ const BlogPage = () => {
       >
         {/* Header Section */}
         <div
-          className="relative h-[500px] w-full bg-cover bg-center"
-          style={{ backgroundImage: `url(${Blog})` }}
+          className="relative h-[500px] w-full bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url('${singleData.featuredImage}')`,
+          }}
         >
           <div className="absolute inset-0 flex items-center justify-center">
             <h1 className="text-4xl md:text-5xl font-bold text-center">
-              The Rise of Artificial Intelligence in Healthcare
+              {singleData.title}
             </h1>
           </div>
         </div>
@@ -82,39 +84,13 @@ const BlogPage = () => {
           <div className="md:col-span-2 space-y-6">
             <div>
               <h2 className="text-2xl font-semibold">Introduction</h2>
-              <ReadMore
-                text={introText}
-                maxLength={300}
-                className="mt-2 text-gray-300"
-              />
+              {singleData.excerpt}
             </div>
 
-            <div>
-              <h2 className="text-2xl font-semibold">
-                Artificial Intelligence (AI)
-              </h2>
-              <ReadMore
-                text={aiText}
-                maxLength={800}
-                className="mt-2 text-gray-300"
-              />
-              <ReadMore
-                text={aiText}
-                maxLength={800}
-                className="mt-2 text-gray-300"
-              />
-            </div>
-
-            <div>
-              <h2 className="text-2xl font-semibold">
-                Predictive Analytics and Disease Prevention
-              </h2>
-              <ReadMore
-                text={predictiveText}
-                maxLength={200}
-                className="mt-2 text-gray-300"
-              />
-            </div>
+            <div
+              className="blog-content prose prose-invert max-w-none text-gray-300"
+              dangerouslySetInnerHTML={{ __html: singleData.content }}
+            />
           </div>
           {/* Sidebar Section */}
           <div className="space-y-6">
@@ -148,16 +124,22 @@ const BlogPage = () => {
                 >
                   Publication Date :
                 </span>{" "}
-                October 15, 2023
+                {new Date(singleData.createdAt).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}{" "}
               </p>
-              <p className="text-md">
+              <p className="text-md flex flex-wrap gap-2">
                 <span
                   className="text-lg"
                   style={{ color: darkTheme.colors.textSecondary }}
                 >
-                  Category :
-                </span>{" "}
-                Healthcare
+                  Category:{" "}
+                </span>
+                {singleData?.categories?.map((val, index) => (
+                  <span key={index}>{val}</span>
+                ))}
               </p>
               <p className="text-md">
                 <span
@@ -175,7 +157,7 @@ const BlogPage = () => {
                 >
                   Author :
                 </span>{" "}
-                Dr. Emily Walker
+                {singleData.author}{" "}
               </p>
             </div>
             <div
@@ -194,6 +176,22 @@ const BlogPage = () => {
                 <li>The Future of AI in Healthcare</li>
                 <li>Conclusion</li>
               </ul>
+            </div>
+            <div
+              style={{ borderColor: darkTheme.colors.border }}
+              className="border p-4 rounded"
+            >
+              <h3 className="font-semibold mb-2">Tags</h3>
+              <div className="flex flex-wrap gap-2">
+                {singleData?.tags?.map((tag, index) => (
+                  <span
+                    key={index}
+                    className="bg-[#ff5500]/10 text-[#ff5500] px-3 py-1 rounded-full text-sm"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
         </div>

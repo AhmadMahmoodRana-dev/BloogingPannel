@@ -14,7 +14,7 @@ export const createBlog = async (req, res) => {
 // Get All Blogs
 export const getAllBlogs = async (req, res) => {
   try {
-    const blogs = await Blog.find().populate("author", "name email");
+    const blogs = await Blog.find();
     res.json(blogs);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -24,7 +24,7 @@ export const getAllBlogs = async (req, res) => {
 // Get Blog by Slug
 export const getBlogBySlug = async (req, res) => {
   try {
-    const blog = await Blog.findOne({ slug: req.params.slug }).populate("author", "name email");
+    const blog = await Blog.findOne({ slug: req.params.slug });
     if (!blog) return res.status(404).json({ message: "Blog not found" });
     res.json(blog);
   } catch (error) {

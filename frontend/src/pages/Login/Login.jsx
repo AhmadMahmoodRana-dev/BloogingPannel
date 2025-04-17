@@ -5,6 +5,7 @@ import useAuthStore from "../../store/useAuthStore";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoginSchema from "../../schema/LoginSchema";
+import Navbar from "../../components/Navbar";
 
 const Login = () => {
   const { login } = useAuthStore();
@@ -33,10 +34,12 @@ const Login = () => {
   };
 
   return (
+    <>
+<Navbar/>
     <div
       style={{
         backgroundColor: darkTheme.colors.background,
-        minHeight: "90.6vh",
+        minHeight: "91vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -140,6 +143,7 @@ const Login = () => {
         pauseOnHover
       />
     </div>
+    </>
   );
 };
 

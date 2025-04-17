@@ -1,74 +1,87 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import logo from "../assets/Group.png";
 import darkTheme from "../colors/theme";
 import useAuthStore from "../store/useAuthStore";
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { logout } = useAuthStore();
+
+  const linkClasses = ({ isActive }) =>
+    `px-3 py-2 rounded-md  ${
+      isActive ? "text-white border" : "text-gray-400"
+    }`;
+
+  const linkStyle = ({ isActive }) =>
+    isActive
+      ? {
+          backgroundColor: darkTheme.colors.NavbarSelectedTab,
+          borderColor: darkTheme.colors.border,
+        }
+      : {};
+
   return (
     <nav
       style={{
         backgroundColor: darkTheme.colors.NavbarBackground,
         borderColor: darkTheme.colors.border,
       }}
-      className="py-4 lg:px-16  px-5 md:px-8 shadow-md border-b"
+      className="py-4 lg:px-16 px-5 md:px-8 shadow-md border-b"
     >
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
-        <Link
+        <NavLink
           to="/"
-          className="text-white text-2xl font-bold flex  gap-4 items-center"
+          className="text-white text-2xl font-bold flex gap-4 items-center"
         >
-          <img src={logo} width={30} /> <p>FutureTech</p>
-        </Link>
+          <img src={logo} width={30} alt="logo" /> <p>FutureTech</p>
+        </NavLink>
 
         {/* Desktop Menu */}
-        <ul className="hidden md:flex space-x-6 text-gray-400">
+        <ul className="hidden md:flex space-x-6">
           <li>
-            <Link
-              style={{
-                backgroundColor: darkTheme.colors.NavbarSelectedTab,
-                borderColor: darkTheme.colors.border,
-              }}
-              to="/"
-              className=" border px-3 py-2 text-white rounded-md"
-            >
+            <NavLink to="/" className={linkClasses} style={linkStyle}>
               Home
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/news" className="text-white">
+            <NavLink to="/news" className={linkClasses} style={linkStyle}>
               News
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/podcasts" className="text-white">
+            <NavLink to="/podcasts" className={linkClasses} style={linkStyle}>
               Podcasts
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/resources" className="text-white">
+            <NavLink to="/resources" className={linkClasses} style={linkStyle}>
               Resources
-            </Link>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/register" className={linkClasses} style={linkStyle}>
+              Register
+            </NavLink>
           </li>
         </ul>
 
         {/* Contact Button */}
-        <Link
-          onClick={() => logout()}
+        <button
+          onClick={logout}
           className="hidden md:block bg-yellow-500 text-black w-9 h-9 rounded-full font-semibold"
         >
           <img
             className="w-full h-full rounded-full"
             src="https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?ga=GA1.1.1076821047.1737958060&semt=ais_hybrid&w=740"
-            alt=""
+            alt="User"
           />
-        </Link>
+        </button>
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden text-gray-400"
+          className="md:hidden text-gray-400 text-2xl"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? "✖" : "☰"}
@@ -85,49 +98,49 @@ const Navbar = () => {
           className="md:hidden text-white space-y-2 p-4 border-t"
         >
           <li>
-            <Link
+            <NavLink
               to="/"
               className="block py-2"
               onClick={() => setIsOpen(false)}
             >
               Home
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link
+            <NavLink
               to="/news"
               className="block py-2"
               onClick={() => setIsOpen(false)}
             >
               News
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link
+            <NavLink
               to="/podcasts"
               className="block py-2"
               onClick={() => setIsOpen(false)}
             >
               Podcasts
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link
+            <NavLink
               to="/resources"
               className="block py-2"
               onClick={() => setIsOpen(false)}
             >
               Resources
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link
+            <NavLink
               to="/contact"
               className="block py-2 bg-yellow-500 text-black text-center rounded-md"
               onClick={() => setIsOpen(false)}
             >
               Contact Us
-            </Link>
+            </NavLink>
           </li>
         </ul>
       )}

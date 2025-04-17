@@ -5,6 +5,7 @@ import RegisterSchema from "../../schema/RegisterSchema";
 import useAuthStore from "../../store/useAuthStore";
 import { ToastContainer, toast } from "react-toastify"; // Import Toastify
 import "react-toastify/dist/ReactToastify.css"; // Import CSS for Toastify
+import Navbar from "../../components/Navbar";
 
 const Register = () => {
   const { register } = useAuthStore();
@@ -36,10 +37,12 @@ const Register = () => {
   };
 
   return (
+    <>
+    <Navbar/>
     <div
       style={{
         backgroundColor: darkTheme.colors.background,
-        minHeight: "90.6vh",
+        minHeight: "91vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -161,6 +164,7 @@ const Register = () => {
         pauseOnHover 
       />
     </div>
+    </>
   );
 };
 

@@ -7,6 +7,8 @@ import BlogPage from "./pages/BlogPage/BlogPage";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import AddBlogPage from "./dashboard/AddBlogPage";
+import DashboardHome from "./dashboard/DashboardHome";
+import ProfilePage from "./pages/ProfilePage/ProfilePage"
 
 const App = () => {
   return (
@@ -14,6 +16,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/blog/:slug" element={<BlogPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
 
         {/* Public Routes */}
         <Route element={<PublicRoutes />}>
@@ -23,7 +26,7 @@ const App = () => {
 
         {/* Private Routes with nested layout */}
         <Route path="/dashboard" element={<PrivateRoutes />}>
-          <Route index element={<h1>HOME</h1>} />
+          <Route index element={<DashboardHome/>} />
           <Route path="create-blog" element={<AddBlogPage/>} />
           <Route path="settings" element={<h1>Settings Page</h1>} />
         </Route>

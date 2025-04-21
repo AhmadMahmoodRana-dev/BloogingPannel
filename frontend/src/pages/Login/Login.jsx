@@ -2,7 +2,6 @@ import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import darkTheme from "../../colors/theme";
 import useAuthStore from "../../store/useAuthStore";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoginSchema from "../../schema/LoginSchema";
 import Navbar from "../../components/Navbar";
@@ -53,7 +52,6 @@ const Login = () => {
           console.log(values);
           login(values)
           resetForm();
-          toast.success("Login Successfully!");
         }}
       >
         {() => (
@@ -130,18 +128,6 @@ const Login = () => {
           </Form>
         )}
       </Formik>
-
-      {/* Toast container to display the toast messages */}
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
     </div>
     </>
   );

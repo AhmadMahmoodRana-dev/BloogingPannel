@@ -1,4 +1,3 @@
-// src/AddBlogPage.js
 import React, { useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import {

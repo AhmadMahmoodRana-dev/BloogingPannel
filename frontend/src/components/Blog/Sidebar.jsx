@@ -10,10 +10,11 @@ import {
   FiLogOut 
 } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
+import useAuthStore from '../../store/useAuthStore';
 
 const Sidebar = () => {
   const [selectedTab, setSelectedTab] = useState('dashboard');
-
+const {logout} = useAuthStore()
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: <FiHome />,link:"/dashboard/" },
     { id: 'create', label: 'Create Blog', icon: <FiEdit2 />,link:"/dashboard/create-blog" },
@@ -85,7 +86,7 @@ const Sidebar = () => {
           }}
         >
           <FiLogOut />
-          <span className="ml-3">Log Out</span>
+          <span onClick={() => logout()} className="ml-3">Log Out</span>
         </button>
       </div>
     </div>

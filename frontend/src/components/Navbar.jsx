@@ -1,17 +1,14 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/Group.png";
 import darkTheme from "../colors/theme";
-import useAuthStore from "../store/useAuthStore";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { logout } = useAuthStore();
+  const token = localStorage.getItem("token");
 
   const linkClasses = ({ isActive }) =>
-    `px-3 py-2 rounded-md  ${
-      isActive ? "text-white border" : "text-gray-400"
-    }`;
+    `px-3 py-2 rounded-md  ${isActive ? "text-white border" : "text-gray-400"}`;
 
   const linkStyle = ({ isActive }) =>
     isActive
@@ -20,6 +17,29 @@ const Navbar = () => {
           borderColor: darkTheme.colors.border,
         }
       : {};
+
+  const navItems = [
+    {
+      title: "Home",
+      link: "/",
+    },
+    {
+      title: "News",
+      link: "/dashboard",
+    },
+    {
+      title: "Podcasts",
+      link: "podcasts",
+    },
+    {
+      title: "Resources",
+      link: "/resources",
+    },
+    {
+      title: "Register",
+      link: "/register",
+    },
+  ];
 
   return (
     <nav
@@ -40,36 +60,36 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex space-x-6">
-          <li>
-            <NavLink to="/" className={linkClasses} style={linkStyle}>
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/news" className={linkClasses} style={linkStyle}>
-              News
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/podcasts" className={linkClasses} style={linkStyle}>
-              Podcasts
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/resources" className={linkClasses} style={linkStyle}>
-              Resources
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/register" className={linkClasses} style={linkStyle}>
-              Register
-            </NavLink>
-          </li>
+          {navItems.map((item, index) => {
+            return (
+              <li>
+                <NavLink
+                  to={item.link}
+                  className={linkClasses}
+                  style={linkStyle}
+                >
+                  {item.title}
+                </NavLink>
+              </li>
+            );
+          })}
+          {
+            token ? <li>
+                <NavLink
+                  to={'/dashboard'}
+                  className={linkClasses}
+                  style={linkStyle}
+                >
+                  Dashboard
+                </NavLink>
+              </li>
+              : null
+          }
         </ul>
 
         {/* Contact Button */}
-        <button
-          onClick={logout}
+        <Link
+          to={"/profile"}
           className="hidden md:block bg-yellow-500 text-black w-9 h-9 rounded-full font-semibold"
         >
           <img
@@ -77,7 +97,7 @@ const Navbar = () => {
             src="https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?ga=GA1.1.1076821047.1737958060&semt=ais_hybrid&w=740"
             alt="User"
           />
-        </button>
+        </Link>
 
         {/* Mobile Menu Button */}
         <button

@@ -18,7 +18,7 @@ const {logout} = useAuthStore()
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: <FiHome />,link:"/dashboard/" },
     { id: 'create', label: 'Create Blog', icon: <FiEdit2 />,link:"/dashboard/create-blog" },
-    { id: 'posts', label: 'All Posts', icon: <FiFileText />,link:"/dashboard/" },
+    { id: 'posts', label: 'All Posts', icon: <FiFileText />,link:"/dashboard/all-blogs" },
     { id: 'analytics', label: 'Analytics', icon: <FiBarChart2 />,link:"/dashboard/" },
     { id: 'profile', label: 'My Profile', icon: <FiUser />,link:"/dashboard/" },
     { id: 'settings', label: 'Settings', icon: <FiSettings />,link:"/dashboard/" },

@@ -68,6 +68,22 @@ const useBlogStore = create((set, get) => {
         });
       }
     },
+    deleteBlog: async (id) => {
+      set({ loading: true, error: null });
+      try {
+        const response = await axios.delete(
+          `${import.meta.env.VITE_API_BASE_URL}main/${id}`
+        );
+        console.log(response,"Blog Delete Successfully");
+        await getBlog();
+        set({loading: false });
+      } catch (error) {
+        set({
+          error: error.response?.data?.message || error.message,
+          loading: false,
+        });
+      }
+    },
   };
 });
 

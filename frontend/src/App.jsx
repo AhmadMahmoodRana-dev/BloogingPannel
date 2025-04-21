@@ -9,6 +9,7 @@ import Login from "./pages/Login/Login";
 import AddBlogPage from "./dashboard/AddBlogPage";
 import DashboardHome from "./dashboard/DashboardHome";
 import ProfilePage from "./pages/ProfilePage/ProfilePage"
+import AllBlogs from "./dashboard/AllBlogs";
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
         <Route path="/dashboard" element={<PrivateRoutes />}>
           <Route index element={<DashboardHome/>} />
           <Route path="create-blog" element={<AddBlogPage/>} />
+          <Route path="all-blogs" element={<AllBlogs/>} />
           <Route path="settings" element={<h1>Settings Page</h1>} />
         </Route>
       </Routes>

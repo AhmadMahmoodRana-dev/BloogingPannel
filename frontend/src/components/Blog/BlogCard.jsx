@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import darkTheme from "../../colors/theme";
-import { ArrowUpRight, Heart, MessageCircle, Share } from "lucide-react";
-import { Link } from "react-router-dom";
+import {ArrowUpRight, MessageCircle } from "lucide-react";
+import { FaRegEye, FaHeart, FaLocationArrow } from "react-icons/fa";
 
-const BlogCard = ({image,author,category,date,title,description,likes,comments,shares,slug}) => {
+import { Link } from "react-router-dom";
+import useAuthStore from "../../store/useAuthStore";
+import useBlogStore from "../../store/useBlogStore";
+
+const BlogCard = ({image,author,category,date,title,description,likes,comments,shares,slug,id}) => {
+  const {getProfile,user} = useAuthStore()
+  const {likeBlog,isLikeMap} = useBlogStore()
+  const isLiked = isLikeMap?.[id] ?? likes.includes(user?._id);
+
+  useEffect(() =>{
+    getProfile()
+  },[])
   return (
     <div
       className="group bg-[#141414] p-6 rounded-xl border border-[#2a2a2a] hover:border-[#3a3a3a] transition-all hover:-translate-y-1.5 cursor-pointer flex flex-col overflow-hidden"
@@ -61,15 +72,15 @@ const BlogCard = ({image,author,category,date,title,description,likes,comments,s
             className="flex gap-6 flex-wrap"
           >
             <div className="flex items-center gap-1.5">
-              <Heart className="w-4 h-4" />
-              <span className="text-xs font-medium">{likes}</span>
+              <FaHeart onClick={() => likeBlog(id,user?._id,slug)} color={`${isLiked ? "red" : ""}`}  className={`w-4 h-4`} />
+              <span className={`text-xs font-medium ${isLiked ? "text-red-600" : ""}`}>{likes.length}</span>
             </div>
             <div className="flex items-center gap-1.5">
               <MessageCircle className="w-4 h-4" />
               <span className="text-xs font-medium">{comments}</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <Share className="w-4 h-4" />
+              <FaLocationArrow className="w-4 h-4" />
               <span className="text-xs font-medium">{shares}</span>
             </div>
           </div>

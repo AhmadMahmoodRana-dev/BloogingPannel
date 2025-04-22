@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import darkTheme from "../../colors/theme";
 import { FaRegEye, FaHeart, FaLocationArrow } from "react-icons/fa";
-import ReadMore from "../../components/Blog/ReadMore";
 import BlogCard from "../../components/Blog/BlogCard";
 import Navbar from "../../components/Navbar";
 import useBlogStore from "../../store/useBlogStore";
 import { useParams } from "react-router-dom";
+import useAuthStore from "../../store/useAuthStore";
 
 const blogPosts = [
   {
@@ -54,10 +54,17 @@ const blogPosts = [
 
 const BlogPage = () => {
   const { slug } = useParams();
-  const { getSingleSlugBlog, singleData } = useBlogStore();
+  const { getSingleSlugBlog, singleData,likeBlog,isLikeMap } = useBlogStore();
+  const {getProfile,user} = useAuthStore() 
+
   useEffect(() => {
     getSingleSlugBlog(slug);
+    getProfile()
   }, []);
+
+  const isLiked = isLikeMap?.[singleData?._id] ?? singleData?.likes?.includes(user?._id);
+
+  
 
   return (
     <>
@@ -100,8 +107,8 @@ const BlogPage = () => {
             >
               <div className="flex items-center justify-between text-sm text-gray-400">
                 <span className="flex justify-center items-center gap-2">
-                  <FaHeart size={20} color="#FF5500" />
-                  50k
+                  <FaHeart className="cursor-pointer" onClick={() => likeBlog(singleData?._id,user?._id,slug)} size={20} color={`${isLiked ? "red" : ""}`} />
+                  {singleData?.likes?.length}
                 </span>
                 <span className="flex justify-center items-center gap-2">
                   <FaRegEye size={20} />

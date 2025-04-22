@@ -85,6 +85,7 @@ const BlogList = () => {
               shares={post.shares}
               title={post.title}
               slug={post.slug}
+              id={post._id}
             />
           </motion.div>
         ))}

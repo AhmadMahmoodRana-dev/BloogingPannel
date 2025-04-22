@@ -58,7 +58,6 @@ const useAuthStore = create((set, get) => {
             },
           }
         );
-        console.log(data, "Successfully Fetch Profile Data");
         set({ user: data, loading: false });
       } catch (error) {
         set({

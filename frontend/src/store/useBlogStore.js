@@ -11,7 +11,7 @@ const useBlogStore = create((set, get) => {
     loading: false,
     error: null,
     token: storedToken,
-
+isLikeMap: {},
     addBlog: async (blogData) => {
       set({ loading: true, error: null });
       try {
@@ -84,6 +84,40 @@ const useBlogStore = create((set, get) => {
         });
       }
     },
+    likeBlog: async (blogId, userId,slug) => {
+      set({ loading: true, error: null });
+      try {
+        const { token, getBlog, isLikeMap,getSingleSlugBlog } = get();
+        const response = await axios.post(
+          `${import.meta.env.VITE_API_BASE_URL}main/${blogId}/like`,
+          { userId },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+    
+        const isLiked = response.data?.liked ?? false;
+    
+        await getBlog();
+        await getSingleSlugBlog(slug)
+    
+        set({
+          loading: false,
+          isLikeMap: {
+            ...isLikeMap,
+            [blogId]: isLiked,
+          },
+        });
+      } catch (error) {
+        set({
+          error: error.response?.data?.message || error.message,
+          loading: false,
+        });
+      }
+    },
+    
   };
 });
 

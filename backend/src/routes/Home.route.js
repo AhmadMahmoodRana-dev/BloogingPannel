@@ -10,7 +10,7 @@ Home.get("/", getAllBlogs);
 Home.get("/:slug", getBlogBySlug);
 Home.put("/:id", updateBlog);
 Home.delete("/:id", deleteBlog);
-Home.post("/:blogId/like", toggleLikeBlog);
+Home.post("/:blogId/like",auth, toggleLikeBlog);
 
 
 export default Home;

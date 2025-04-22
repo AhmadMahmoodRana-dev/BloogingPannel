@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import axios from "axios";
 
-const useAuthStore = create((set) => {
+const useAuthStore = create((set, get) => {
   const storedToken =
     typeof window !== "undefined" ? localStorage.getItem("token") : null;
 
@@ -20,7 +20,6 @@ const useAuthStore = create((set) => {
         );
         console.log(response, "Login Response");
         const { token } = response.data;
-        // Save token to localStorage
         localStorage.setItem("token", token);
 
         set({ token, loading: false });
@@ -39,11 +38,31 @@ const useAuthStore = create((set) => {
           `${import.meta.env.VITE_API_BASE_URL}auth/register`,
           userData
         );
-        set({ user: data, loading: false });
         console.log("RegisterResponse", data);
       } catch (error) {
         set({
           error: error.response?.data?.message || error.message,
+          loading: false,
+        });
+      }
+    },
+    getProfile: async () => {
+      set({ loading: true, error: null });
+      try {
+        const { token } = get();
+        const { data } = await axios.get(
+          `${import.meta.env.VITE_API_BASE_URL}auth/profile`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log(data, "Successfully Fetch Profile Data");
+        set({ user: data, loading: false });
+      } catch (error) {
+        set({
+          error: error?.data?.message || error.message,
           loading: false,
         });
       }

@@ -39,6 +39,10 @@ const Navbar = () => {
       title: "Register",
       link: "/register",
     },
+    {
+      title: "Contact Us",
+      link: "/contact-us",
+    },
   ];
 
   return (

@@ -10,6 +10,7 @@ import AddBlogPage from "./dashboard/AddBlogPage";
 import DashboardHome from "./dashboard/DashboardHome";
 import ProfilePage from "./pages/ProfilePage/ProfilePage"
 import AllBlogs from "./dashboard/AllBlogs";
+import ContactUs from "./pages/ContactUs/ContactUs";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/blog/:slug" element={<BlogPage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/contact-us" element={<ContactUs />} />
 
         {/* Public Routes */}
         <Route element={<PublicRoutes />}>

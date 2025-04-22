@@ -32,10 +32,11 @@ const Home = () => {
         "Written by our team of tech experts and industry professionals.",
     },
   ];
+
+
   return (
     <div className="w-full miin-h-screen h-auto">
       <Navbar />
-
       <Header />
       <LatestNews />
       <HomePageUseableContainer

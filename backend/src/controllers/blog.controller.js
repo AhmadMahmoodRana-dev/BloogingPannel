@@ -55,3 +55,29 @@ export const deleteBlog = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+
+// Like or Unlike Blog
+export const toggleLikeBlog = async (req, res) => {
+  try {
+    const { blogId } = req.params;
+    const { userId } = req.body;
+
+    const blog = await Blog.findById(blogId);
+    if (!blog) return res.status(404).json({ message: "Blog not found" });
+
+    const alreadyLiked = blog.likes.includes(userId);
+
+    if (alreadyLiked) {
+      blog.likes = blog.likes.filter(id => id.toString() !== userId);
+    } else {
+      blog.likes.push(userId);
+    }
+
+    await blog.save();
+
+    res.json({ likes: blog.likes, liked: !alreadyLiked });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};

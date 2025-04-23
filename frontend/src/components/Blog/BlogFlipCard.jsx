@@ -41,8 +41,8 @@ const BlogFlipCard = ({ blog }) => {
           }}
           className="absolute w-full min-h-[400px] max-h-[400px] border rounded-xl shadow-xl [transform:rotateY(180deg)] backface-hidden flex items-center  justify-evenly"
         >
-          <button className="p-5 rounded-full bg-red-500 text-white  hover:bg-red-600 transition">
-            <MdDelete onClick={() => deleteBlog(blog?._id)} size={22} />
+          <button onClick={() => deleteBlog(blog?._id)} className="p-5 rounded-full bg-red-500 text-white  hover:bg-red-600 transition">
+            <MdDelete size={22} />
           </button>
           <button className="p-5 rounded-full bg-yellow-400 text-white  hover:bg-yellow-500 transition">
             <MdModeEdit size={22} />

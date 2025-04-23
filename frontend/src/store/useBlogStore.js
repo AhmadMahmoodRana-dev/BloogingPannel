@@ -7,11 +7,12 @@ const useBlogStore = create((set, get) => {
 
   return {
     data: [],
-    singleData:{},
+    oneUserData: [],
+    singleData: {},
     loading: false,
     error: null,
     token: storedToken,
-isLikeMap: {},
+    isLikeMap: {},
     addBlog: async (blogData) => {
       set({ loading: true, error: null });
       try {
@@ -53,6 +54,21 @@ isLikeMap: {},
         });
       }
     },
+    getSingleUserBlog: async (authorId) => {
+      set({ loading: true, error: null });
+      try {
+        const { data } = await axios.get(
+          `${import.meta.env.VITE_API_BASE_URL}main/author/${authorId}`
+        );
+        console.log(data, "Current User All Blog");
+        set({ oneUserData: data, loading: false });
+      } catch (error) {
+        set({
+          error: error.response?.data?.message || error.message,
+          loading: false,
+        });
+      }
+    },
     getSingleSlugBlog: async (slug) => {
       set({ loading: true, error: null });
       try {
@@ -71,12 +87,14 @@ isLikeMap: {},
     deleteBlog: async (id) => {
       set({ loading: true, error: null });
       try {
+        const { getBlog } = get();
+
         const response = await axios.delete(
           `${import.meta.env.VITE_API_BASE_URL}main/${id}`
         );
-        console.log(response,"Blog Delete Successfully");
+        console.log(response, "Blog Delete Successfully");
         await getBlog();
-        set({loading: false });
+        set({ loading: false });
       } catch (error) {
         set({
           error: error.response?.data?.message || error.message,
@@ -84,10 +102,10 @@ isLikeMap: {},
         });
       }
     },
-    likeBlog: async (blogId, userId,slug) => {
+    likeBlog: async (blogId, userId, slug) => {
       set({ loading: true, error: null });
       try {
-        const { token, getBlog, isLikeMap,getSingleSlugBlog } = get();
+        const { token, getBlog, isLikeMap, getSingleSlugBlog } = get();
         const response = await axios.post(
           `${import.meta.env.VITE_API_BASE_URL}main/${blogId}/like`,
           { userId },
@@ -97,12 +115,12 @@ isLikeMap: {},
             },
           }
         );
-    
+
         const isLiked = response.data?.liked ?? false;
-    
+
         await getBlog();
-        await getSingleSlugBlog(slug)
-    
+        await getSingleSlugBlog(slug);
+
         set({
           loading: false,
           isLikeMap: {
@@ -117,7 +135,6 @@ isLikeMap: {},
         });
       }
     },
-    
   };
 });
 

@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import {
   FiBook,
   FiEdit,
-  FiUser,
   FiTag,
   FiFolder,
   FiSave,
@@ -14,45 +13,54 @@ import darkTheme from "../colors/theme";
 import TagInput from "../components/Blog/TagInput";
 import useBlogStore from "../store/useBlogStore";
 import { toast, ToastContainer } from "react-toastify";
+import useAuthStore from "../store/useAuthStore";
 
 const AddBlogPage = () => {
-  const [title, setTitle] = useState("");
-  const [slug, setSlug] = useState("");
-  const [content, setContent] = useState("");
-  const [author, setAuthor] = useState("");
-  const [categories, setCategories] = useState([]);
-  const [tags, setTags] = useState([]);
-  const [excerpt, setExcerpt] = useState("");
-  const [featuredImage, setFeaturedImage] = useState("");
-  const [isPublished, setIsPublished] = useState(false);
+  const [blogData, setBlogData] = useState({
+    title: "",
+    slug: "",
+    content: "",
+    categories: [],
+    tags: [],
+    excerpt: "",
+    featuredImage: "",
+    isPublished: false,
+  });
+
   const { addBlog } = useBlogStore();
+  const { getProfile, user } = useAuthStore();
+  const authorId = user?._id;
+  const author = user?.name;
+
+  useEffect(() => {
+    getProfile();
+  }, []);
+
+  const handleChange = (field, value) => {
+    setBlogData((prev) => ({ ...prev, [field]: value }));
+  };
 
   const handleSave = () => {
+    const { title, slug, content } = blogData;
     if (title && slug && content && author) {
-      const blogData = {
-        title,
-        slug,
-        content,
+      const blog = {
+        ...blogData,
         author,
-        categories,
-        tags,
-        excerpt,
-        featuredImage,
-        isPublished,
+        authorId,
       };
-      console.log(blogData)
-      addBlog(blogData);
-      toast.success("SuccessFully Upload Blog")
-      // Reset all form fields
-      setTitle("");
-      setSlug("");
-      setContent("");
-      setAuthor("");
-      setCategories([]);
-      setTags([]);
-      setExcerpt("");
-      setFeaturedImage("");
-      setIsPublished(false);
+      console.log(blog);
+      addBlog(blog);
+      toast.success("Successfully Uploaded Blog");
+      setBlogData({
+        title: "",
+        slug: "",
+        content: "",
+        categories: [],
+        tags: [],
+        excerpt: "",
+        featuredImage: "",
+        isPublished: false,
+      });
     }
   };
 
@@ -68,7 +76,6 @@ const AddBlogPage = () => {
         }}
         className="border max-w-full mx-auto rounded-xl shadow-md overflow-hidden p-6 space-y-8"
       >
-        {/* Header */}
         <div
           style={{ borderColor: darkTheme.colors.border }}
           className="border-b pb-4"
@@ -82,10 +89,8 @@ const AddBlogPage = () => {
           </h1>
         </div>
 
-        {/* Form Fields */}
         <div className="space-y-6">
           <div className="space-y-4">
-            {/* Title Field */}
             <div>
               <label
                 style={{ color: darkTheme.colors.textPrimary }}
@@ -95,18 +100,17 @@ const AddBlogPage = () => {
               </label>
               <input
                 type="text"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                value={blogData.title}
+                onChange={(e) => handleChange("title", e.target.value)}
                 style={{
                   borderColor: darkTheme.colors.border,
                   color: darkTheme.colors.textPrimary,
                 }}
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                className="w-full px-4 py-2 border rounded-lg"
                 placeholder="Enter blog title"
               />
             </div>
 
-            {/* Slug Field */}
             <div>
               <label
                 style={{ color: darkTheme.colors.textPrimary }}
@@ -116,13 +120,13 @@ const AddBlogPage = () => {
               </label>
               <input
                 type="text"
-                value={slug}
-                onChange={(e) => setSlug(e.target.value)}
+                value={blogData.slug}
+                onChange={(e) => handleChange("slug", e.target.value)}
                 style={{
                   borderColor: darkTheme.colors.border,
                   color: darkTheme.colors.textPrimary,
                 }}
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                className="w-full px-4 py-2 border rounded-lg"
                 placeholder="your-blog-slug"
               />
               <p className="mt-1 text-sm text-gray-500">
@@ -130,14 +134,12 @@ const AddBlogPage = () => {
               </p>
             </div>
 
-            {/* Content Editor */}
             <div>
               <label
                 style={{ color: darkTheme.colors.textPrimary }}
                 className="text-sm font-medium flex items-center gap-2 mb-2"
               >
-                <FiEdit style={{ color: darkTheme.colors.textPrimary }} />
-                Content
+                <FiEdit /> Content
               </label>
               <div
                 style={{
@@ -148,95 +150,27 @@ const AddBlogPage = () => {
               >
                 <Editor
                   apiKey="xhbxdw0d188bxkyl0jnkty1sn6wyr1eoz1bktw2s3yzlcmsc"
-                  value={content}
-                  onEditorChange={(newContent) => setContent(newContent)}
+                  value={blogData.content}
+                  onEditorChange={(newContent) =>
+                    handleChange("content", newContent)
+                  }
                   init={{
                     height: 400,
                     menubar: false,
                     plugins: [
-                      "anchor",
-                      "autolink",
-                      "charmap",
-                      "codesample",
-                      "emoticons",
-                      "image",
-                      "link",
-                      "lists",
-                      "media",
-                      "searchreplace",
-                      "table",
-                      "visualblocks",
-                      "wordcount",
-                      "checklist",
-                      "mediaembed",
-                      "casechange",
-                      "formatpainter",
-                      "pageembed",
-                      "a11ychecker",
-                      "tinymcespellchecker",
-                      "permanentpen",
-                      "powerpaste",
-                      "advtable",
-                      "advcode",
-                      "editimage",
-                      "advtemplate",
-                      "ai",
-                      "mentions",
-                      "tinycomments",
-                      "tableofcontents",
-                      "footnotes",
-                      "mergetags",
-                      "autocorrect",
-                      "typography",
-                      "inlinecss",
-                      "markdown",
-                      "importword",
-                      "exportword",
-                      "exportpdf",
+                      "link", "image", "media", "table", "lists", "wordcount",
                     ],
                     toolbar:
-                      "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
-                    tinycomments_mode: "embedded",
-                    tinycomments_author: "Author name",
-                    mergetags_list: [
-                      { value: "First.Name", title: "First Name" },
-                      { value: "Email", title: "Email" },
-                    ],
-                    ai_request: (request, respondWith) =>
-                      respondWith.string(() =>
-                        Promise.reject("See docs to implement AI Assistant")
-                      ),
+                      "undo redo | bold italic | alignleft aligncenter alignright | bullist numlist | link image media",
                     skin: "oxide",
                     content_css: "default",
                     content_style:
-                      "body { font-family: Inter, sans-serif; font-size: 16px }",
+                      "body { font-family:Inter,sans-serif; font-size:16px }",
                   }}
                 />
               </div>
             </div>
 
-            {/* Author Field */}
-            <div>
-              <label
-                style={{ color: darkTheme.colors.textPrimary }}
-                className="text-sm font-medium flex items-center gap-2 mb-2"
-              >
-                <FiUser /> Author
-              </label>
-              <input
-                type="text"
-                value={author}
-                onChange={(e) => setAuthor(e.target.value)}
-                style={{
-                  borderColor: darkTheme.colors.border,
-                  color: darkTheme.colors.textPrimary,
-                }}
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
-                placeholder="Author name"
-              />
-            </div>
-
-            {/* Categories Field */}
             <div>
               <label
                 style={{ color: darkTheme.colors.textPrimary }}
@@ -245,13 +179,12 @@ const AddBlogPage = () => {
                 <FiFolder /> Categories
               </label>
               <TagInput
-                tags={categories}
-                setTags={setCategories}
+                tags={blogData.categories}
+                setTags={(tags) => handleChange("categories", tags)}
                 placeholder="Type a tag and press Enter"
               />
             </div>
 
-            {/* Tags Field */}
             <div>
               <label
                 style={{ color: darkTheme.colors.textPrimary }}
@@ -260,13 +193,12 @@ const AddBlogPage = () => {
                 <FiTag /> Tags
               </label>
               <TagInput
-                tags={tags}
-                setTags={setTags}
+                tags={blogData.tags}
+                setTags={(tags) => handleChange("tags", tags)}
                 placeholder="Type a tag and press Enter"
               />
             </div>
 
-            {/* Excerpt Field */}
             <div>
               <label
                 style={{ color: darkTheme.colors.textPrimary }}
@@ -276,18 +208,17 @@ const AddBlogPage = () => {
               </label>
               <textarea
                 maxLength={300}
-                value={excerpt}
-                onChange={(e) => setExcerpt(e.target.value)}
+                value={blogData.excerpt}
+                onChange={(e) => handleChange("excerpt", e.target.value)}
                 style={{
                   borderColor: darkTheme.colors.border,
                   color: darkTheme.colors.textPrimary,
                 }}
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                className="w-full px-4 py-2 border rounded-lg"
                 placeholder="Short summary of the blog (max 300 characters)"
               />
             </div>
 
-            {/* Featured Image Field */}
             <div>
               <label
                 style={{ color: darkTheme.colors.textPrimary }}
@@ -297,23 +228,26 @@ const AddBlogPage = () => {
               </label>
               <input
                 type="text"
-                value={featuredImage}
-                onChange={(e) => setFeaturedImage(e.target.value)}
+                value={blogData.featuredImage}
+                onChange={(e) =>
+                  handleChange("featuredImage", e.target.value)
+                }
                 style={{
                   borderColor: darkTheme.colors.border,
                   color: darkTheme.colors.textPrimary,
                 }}
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                className="w-full px-4 py-2 border rounded-lg"
                 placeholder="https://example.com/image.jpg"
               />
             </div>
 
-            {/* Publish Checkbox */}
             <div className="flex items-center gap-3">
               <input
                 type="checkbox"
-                checked={isPublished}
-                onChange={(e) => setIsPublished(e.target.checked)}
+                checked={blogData.isPublished}
+                onChange={(e) =>
+                  handleChange("isPublished", e.target.checked)
+                }
                 className="w-5 h-5"
               />
               <label
@@ -325,7 +259,6 @@ const AddBlogPage = () => {
             </div>
           </div>
 
-          {/* Save Button */}
           <button
             onClick={handleSave}
             style={{ borderColor: darkTheme.colors.border }}

@@ -2,13 +2,25 @@ import React, { useEffect } from "react";
 import darkTheme from "../colors/theme";
 import BlogFlipCard from "../components/Blog/BlogFlipCard";
 import useBlogStore from "../store/useBlogStore";
+import useAuthStore from "../store/useAuthStore";
 
 const AllBlogs = () => {
-  const { getBlog, data } = useBlogStore();
+  const { getSingleUserBlog, oneUserData } = useBlogStore();
+  const { getProfile, user } = useAuthStore();
 
   useEffect(() => {
-    getBlog();
+    getProfile();
   }, []);
+  
+  useEffect(() => {
+    if (user?._id) {
+      getSingleUserBlog(user._id);
+    }
+  }, [user]);
+  
+
+console.log("SingleUSERDATA",oneUserData)
+
   return (
     <div
       className="w-full min-h-screen h-auto p-10"
@@ -25,7 +37,7 @@ const AllBlogs = () => {
           All Posts
         </h1>
         <div className="w-full justify-center min-h-[76vh] gap-4 flex flex-wrap h-auto pb-10">
-          {data.map((blog, index) => {
+          {oneUserData.map((blog, index) => {
             return <BlogFlipCard key={index} blog={blog} />;
           })}
         </div>

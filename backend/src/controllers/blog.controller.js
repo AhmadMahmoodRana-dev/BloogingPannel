@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import Blog from "../models/Blog.schema.js";
 
 // Create Blog
@@ -15,6 +16,27 @@ export const createBlog = async (req, res) => {
 export const getAllBlogs = async (req, res) => {
   try {
     const blogs = await Blog.find();
+    res.json(blogs);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// Get Blogs by Author ID
+export const getBlogsByAuthorId = async (req, res) => {
+  try {
+    const authorId = req.params.authorId.trim(); // ✅ Trim to remove \n or spaces
+
+    if (!mongoose.Types.ObjectId.isValid(authorId)) {
+      return res.status(400).json({ error: "Invalid author ID" });
+    }
+
+    const blogs = await Blog.find({ authorId }).sort({ createdAt: -1 });
+
+    if (blogs.length === 0) {
+      return res.status(404).json({ message: "No blogs found for this author" });
+    }
+
     res.json(blogs);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -55,7 +77,6 @@ export const deleteBlog = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-
 
 // Like or Unlike Blog
 export const toggleLikeBlog = async (req, res) => {

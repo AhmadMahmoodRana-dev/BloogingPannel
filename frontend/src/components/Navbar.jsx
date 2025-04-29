@@ -63,7 +63,7 @@ const Navbar = () => {
         </NavLink>
 
         {/* Desktop Menu */}
-        <ul className="hidden md:flex space-x-6">
+        <ul className="hidden lg:flex space-x-6">
           {navItems.map((item, index) => {
             return (
               <li>
@@ -94,7 +94,7 @@ const Navbar = () => {
         {/* Contact Button */}
         <Link
           to={"/profile"}
-          className="hidden md:block bg-yellow-500 text-black w-9 h-9 rounded-full font-semibold"
+          className="hidden lg:block bg-yellow-500 text-black w-9 h-9 rounded-full font-semibold"
         >
           <img
             className="w-full h-full rounded-full"
@@ -105,7 +105,7 @@ const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden text-gray-400 text-2xl"
+          className="lg:hidden text-gray-400 text-2xl"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? "✖" : "☰"}
@@ -119,7 +119,7 @@ const Navbar = () => {
             backgroundColor: darkTheme.colors.NavbarBackground,
             borderColor: darkTheme.colors.border,
           }}
-          className="md:hidden text-white space-y-2 p-4 border-t"
+          className="lg:hidden absolute z-50 w-full  text-white space-y-2 p-4 left-0 mt-4 border-t"
         >
           <li>
             <NavLink

@@ -74,18 +74,18 @@ const BlogPage = () => {
         className="text-white font-sans"
       >
         {/* Header Section */}
-        <div
-          className="relative h-[500px] w-full bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `url('${singleData.featuredImage}')`,
-          }}
-        >
-          <div className="absolute inset-0 flex items-center justify-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-center">
-              {singleData.title}
-            </h1>
-          </div>
-        </div>
+        <div className="relative w-full">
+  <img 
+    src={singleData.featuredImage} 
+    alt="Blog header" 
+    className="w-full h-full object-cover aspect-video"
+  />
+  <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+    <h1 className="text-3xl md:text-5xl font-bold text-center w-[70%]">
+      {singleData.title}
+    </h1>
+  </div>
+</div>
         {/* Modified Blog Info Section */}
         <div className="max-w-7xl mx-auto px-4 py-12 grid md:grid-cols-3 gap-8">
           <div className="md:col-span-2 space-y-6">

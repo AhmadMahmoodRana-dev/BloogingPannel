@@ -11,10 +11,14 @@ import DashboardHome from "./dashboard/DashboardHome";
 import ProfilePage from "./pages/ProfilePage/ProfilePage"
 import AllBlogs from "./dashboard/AllBlogs";
 import ContactUs from "./pages/ContactUs/ContactUs";
+import ScrollToHash from "./components/Scrolls/ScrollToHash"
+import ScrollToTop from "./components/Scrolls/ScrollToTop"
 
 const App = () => {
   return (
     <div className="w-full min-h-screen h-auto">
+    <ScrollToHash/>
+    <ScrollToTop/>m 
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/blog/:slug" element={<BlogPage />} />

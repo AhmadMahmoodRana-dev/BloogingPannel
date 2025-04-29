@@ -33,10 +33,9 @@ const Home = () => {
     },
   ];
 
-
   return (
     <div className="w-full miin-h-screen h-auto">
-    <Navbar/>
+      <Navbar />
       <Header />
       <LatestNews />
       <HomePageUseableContainer

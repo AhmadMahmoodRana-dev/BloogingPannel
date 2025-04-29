@@ -36,10 +36,6 @@ const Navbar = () => {
       link: "/resources",
     },
     {
-      title: "Register",
-      link: "/register",
-    },
-    {
       title: "Contact Us",
       link: "/contact-us",
     },
@@ -77,18 +73,28 @@ const Navbar = () => {
               </li>
             );
           })}
-          {
-            token ? <li>
-                <NavLink
-                  to={'/dashboard'}
-                  className={linkClasses}
-                  style={linkStyle}
-                >
-                  Dashboard
-                </NavLink>
-              </li>
-              : null
-          }
+          {token ? (
+            <li>
+              <NavLink
+                to={"/dashboard"}
+                className={linkClasses}
+                style={linkStyle}
+              >
+                Dashboard
+              </NavLink>
+            </li>
+          ) : null}
+          {token ? null : (
+            <li>
+              <NavLink
+                to={"/register"}
+                className={linkClasses}
+                style={linkStyle}
+              >
+                Register
+              </NavLink>
+            </li>
+          )}
         </ul>
 
         {/* Contact Button */}

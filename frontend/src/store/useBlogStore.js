@@ -135,6 +135,22 @@ const useBlogStore = create((set, get) => {
         });
       }
     },
+    editBlog: async (blogId, blogData) => {
+      set({ loading: true, error: null });
+      try {
+        const data = await axios.put(
+          `${import.meta.env.VITE_API_BASE_URL}main/${blogId}`,
+          blogData
+        );
+        console.log(data, "Blog Updated Successfully");
+        set({ loading: false });
+      } catch (error) {
+        set({
+          error: error.response?.data?.message || error.message,
+          loading: false,
+        });
+      }
+    },
   };
 });
 

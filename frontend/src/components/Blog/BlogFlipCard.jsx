@@ -15,9 +15,9 @@ const BlogFlipCard = ({ blog }) => {
             backgroundColor: darkTheme.colors.background,
             borderColor: darkTheme.colors.border,
           }}
-          className="border absolute w-full min-h-[400px] max-h-[400px] rounded-xl shadow-xl backface-hidden "
+          className="border absolute w-full  h-auto py-5 rounded-xl shadow-xl backface-hidden "
         >
-          <p className="text-2xl font-semibold text-white tracking-wider p-4 text-center">
+          <p className="text-2xl font-semibold text-white tracking-wider px-4 text-center">
             {blog?.title}
           </p>
           <p

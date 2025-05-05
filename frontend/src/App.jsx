@@ -18,7 +18,7 @@ const App = () => {
   return (
     <div className="w-full min-h-screen h-auto">
     <ScrollToHash/>
-    <ScrollToTop/>m 
+    <ScrollToTop/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/blog/:slug" element={<BlogPage />} />

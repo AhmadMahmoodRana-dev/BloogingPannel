@@ -205,7 +205,7 @@ export default function ContactUs() {
           </div>
           <button
             type="submit"
-            className="bg-yellow-500 text-black px-6 py-3 rounded hover:bg-yellow-400 w-full md:w-auto"
+            className="bg-yellow-500 text-gray-900 px-6 py-3 rounded hover:bg-yellow-400 w-full md:w-auto"
           >
             Send Message
           </button>

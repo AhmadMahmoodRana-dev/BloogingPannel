@@ -6,6 +6,7 @@ import useAuthStore from "../../store/useAuthStore";
 import { ToastContainer, toast } from "react-toastify"; // Import Toastify
 import "react-toastify/dist/ReactToastify.css"; // Import CSS for Toastify
 import Navbar from "../../components/Navbar";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const { register } = useAuthStore();
@@ -144,9 +145,9 @@ const Register = () => {
               }}
             >
               Already have an account?{" "}
-              <a href="/login" style={{ color: darkTheme.colors.textPrimary }}>
+              <Link to="/login" style={{ color: darkTheme.colors.textPrimary }}>
                 Login
-              </a>
+              </Link>
             </p>
           </Form>
         )}

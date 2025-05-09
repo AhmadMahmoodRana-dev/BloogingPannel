@@ -1,3 +1,4 @@
+import { io } from "../server.js";
 import mongoose from "mongoose";
 import Blog from "../models/Blog.schema.js";
 
@@ -6,6 +7,7 @@ export const createBlog = async (req, res) => {
   try {
     const blog = new Blog(req.body);
     await blog.save();
+    req.io.emit('new_blog', blog);
     res.status(201).json(blog);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -34,7 +36,9 @@ export const getBlogsByAuthorId = async (req, res) => {
     const blogs = await Blog.find({ authorId }).sort({ createdAt: -1 });
 
     if (blogs.length === 0) {
-      return res.status(404).json({ message: "No blogs found for this author" });
+      return res
+        .status(404)
+        .json({ message: "No blogs found for this author" });
     }
 
     res.json(blogs);
@@ -55,12 +59,17 @@ export const getBlogBySlug = async (req, res) => {
 };
 
 // Update Blog
+
 export const updateBlog = async (req, res) => {
   try {
     const blog = await Blog.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
     if (!blog) return res.status(404).json({ message: "Blog not found" });
+
+    // Emit update_blog event
+    io.emit("update_blog", blog);
+
     res.json(blog);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -68,15 +77,21 @@ export const updateBlog = async (req, res) => {
 };
 
 // Delete Blog
+
 export const deleteBlog = async (req, res) => {
   try {
     const blog = await Blog.findByIdAndDelete(req.params.id);
     if (!blog) return res.status(404).json({ message: "Blog not found" });
+
+    // Emit delete_blog event
+    io.emit("delete_blog", req.params.id);
+
     res.json({ message: "Blog deleted successfully" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
+
 
 // Like or Unlike Blog
 export const toggleLikeBlog = async (req, res) => {
@@ -90,12 +105,15 @@ export const toggleLikeBlog = async (req, res) => {
     const alreadyLiked = blog.likes.includes(userId);
 
     if (alreadyLiked) {
-      blog.likes = blog.likes.filter(id => id.toString() !== userId);
+      blog.likes = blog.likes.filter((id) => id.toString() !== userId);
     } else {
       blog.likes.push(userId);
     }
 
     await blog.save();
+
+    // Emit like_blog event
+    io.emit("like_blog", { blogId, likes: blog.likes });
 
     res.json({ likes: blog.likes, liked: !alreadyLiked });
   } catch (error) {

@@ -13,6 +13,42 @@ const useBlogStore = create((set, get) => {
     error: null,
     token: storedToken,
     isLikeMap: {},
+
+    initSocketListeners: (socket) => {
+      if (!socket) return;
+
+      socket.on("new_blog", (blog) => {
+        set((state) => ({
+          data: [blog, ...state.data],
+        }));
+      });
+      socket.on("new_blog", (blog) => {
+        console.log("Received new_blog event", blog); // ✅ Log to confirm
+      });      
+
+      socket.on("update_blog", (updatedBlog) => {
+        set((state) => ({
+          data: state.data.map((blog) =>
+            blog._id === updatedBlog._id ? updatedBlog : blog
+          ),
+        }));
+      });
+
+      socket.on("delete_blog", (deletedBlogId) => {
+        set((state) => ({
+          data: state.data.filter((blog) => blog._id !== deletedBlogId),
+        }));
+      });
+
+      socket.on("like_blog", ({ blogId, likes }) => {
+        set((state) => ({
+          data: state.data.map((blog) =>
+            blog._id === blogId ? { ...blog, likes } : blog
+          ),
+        }));
+      });
+    },
+
     addBlog: async (blogData) => {
       set({ loading: true, error: null });
       try {

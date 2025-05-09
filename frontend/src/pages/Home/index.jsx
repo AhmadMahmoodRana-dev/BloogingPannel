@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSocket } from "../../context/SocketProvider";
+import useBlogStore from "../../store/useBlogStore";
 import icon from "../../assets/Icon.png";
 import icon1 from "../../assets/Icon1.png";
 import BlogList from "../../components/Home/BLogList";
@@ -11,6 +13,28 @@ import TestimonialSection from "../../components/Home/TestimonialSection";
 import Landing from "../../components/Landing";
 
 const Home = () => {
+  const socket = useSocket();
+  const initSocketListeners = useBlogStore((state) => state.initSocketListeners);
+
+  useEffect(() => {
+    if (!socket) return;
+
+    initSocketListeners(socket);
+
+    const handleExampleResponse = (data) => {
+      console.log("Received example_response:", data);
+      // You can add UI updates here based on socket data
+    };
+
+    socket.on("example_response", handleExampleResponse);
+
+    return () => {
+      socket.off("example_response", handleExampleResponse);
+    };
+  }, [socket, initSocketListeners]);
+
+ 
+
   const data = [
     {
       title: "Quantity",

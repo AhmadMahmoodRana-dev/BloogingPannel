@@ -1,6 +1,7 @@
 import React from 'react';
 import { FiBook, FiEdit, FiUsers, FiBarChart2, FiSearch, FiBell, FiUser } from 'react-icons/fi';
 import darkTheme from '../colors/theme';
+// import Table from '../components/Table';
 
 const DashboardHome = () => {
   const { colors } = darkTheme;
@@ -28,6 +29,9 @@ const DashboardHome = () => {
 
   return (
     <div style={{ backgroundColor: colors.background, color: colors.textPrimary, minHeight: '100vh' }}>
+   <div className='px-4'>
+   {/* <Table/> */}
+   </div> 
       {/* Header */}
       <header className='lg:block hidden' style={{ backgroundColor: colors.NavbarBackground, borderBottom: `1px solid ${colors.border}` }}>
         <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex justify-between items-center">
